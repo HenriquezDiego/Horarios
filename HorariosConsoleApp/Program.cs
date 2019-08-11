@@ -7,6 +7,7 @@ namespace HorariosConsoleApp
         public static void Main(string[] args)
         {
             Console.WriteLine("Horarios Console App");
+            Console.ReadLine();
         }
     }
 }
