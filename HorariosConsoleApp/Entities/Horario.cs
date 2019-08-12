@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HorariosConsoleApp.Entities
+﻿namespace HorariosConsoleApp.Entities
 {
     public class Horario
     {
