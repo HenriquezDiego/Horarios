@@ -1,6 +1,6 @@
-﻿using System;
-using HorariosConsoleApp.Persistence;
+﻿using HorariosConsoleApp.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace HorariosConsoleApp
 {
@@ -16,6 +16,7 @@ namespace HorariosConsoleApp
                 using (var appDbContext = new AppDbContext())
                 {
                     appDbContext.Database.Migrate();
+                    
                 }
 
                 Console.WriteLine("¡Base de datos Generada!");
