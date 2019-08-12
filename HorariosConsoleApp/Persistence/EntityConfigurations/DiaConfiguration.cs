@@ -15,43 +15,43 @@ namespace HorariosConsoleApp.Persistence.EntityConfigurations
                 {
                     DiaId = 1,
                     Nombre = "Lunes",
-                    Abreviatura = "LN",
+                    Abreviatura = "L",
                 },
                 new Dia()
                 {
-                    DiaId = 1,
+                    DiaId = 2,
                     Nombre = "Martes",
-                    Abreviatura = "LN",
+                    Abreviatura = "M",
                 },
                 new Dia()
                 {
-                    DiaId = 1,
+                    DiaId = 3,
                     Nombre = "Miércoles",
-                    Abreviatura = "LN",
+                    Abreviatura = "X",
                 },
                 new Dia()
                 {
-                    DiaId = 1,
+                    DiaId = 4,
                     Nombre = "Jueves",
-                    Abreviatura = "LN",
+                    Abreviatura = "J",
                 },
                 new Dia()
                 {
-                    DiaId = 1,
+                    DiaId = 5,
                     Nombre = "Viernes",
-                    Abreviatura = "LN",
+                    Abreviatura = "V",
                 },
                 new Dia()
                 {
-                    DiaId = 1,
+                    DiaId = 6,
                     Nombre = "Sábado",
-                    Abreviatura = "LN",
+                    Abreviatura = "S",
                 },
                 new Dia()
                 {
-                    DiaId = 1,
+                    DiaId = 7,
                     Nombre = "Domingo",
-                    Abreviatura = "LN",
+                    Abreviatura = "D",
                 },
 
             });
