@@ -9,6 +9,6 @@
         public Hora HoraInicio { get; set; }
         public int? HoraFinId { get; set; }
         public Hora HoraFin{ get; set; }
-        
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using HorariosConsoleApp.Persistence;
-using Microsoft.EntityFrameworkCore;
+using HorariosConsoleApp.Services;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace HorariosConsoleApp
 {
@@ -8,20 +9,29 @@ namespace HorariosConsoleApp
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Horarios Console App");
-            Console.WriteLine("Por favor presione Enter para aplicar la migracion");
-            Console.WriteLine("o presione cualquier otra tecla para salir");
-            if (Console.ReadKey().Key == ConsoleKey.Enter)
+           
+            
+            using (var appDbContext = new AppDbContext())
             {
-                using (var appDbContext = new AppDbContext())
+                Console.WriteLine("Horarios Console App");
+                Console.WriteLine(@"Desea aplicar la ultima migración estable (y/n)?");
+                if (Console.ReadKey().Key == ConsoleKey.Y)
                 {
+                    Console.WriteLine("");
                     appDbContext.Database.Migrate();
-                    
                 }
 
-                Console.WriteLine("¡Base de datos Generada!");
-                Console.ReadLine();
+                var horarioService= new HorarioService(appDbContext);
+                foreach (var msj in horarioService.Generate())
+                {
+                    Console.WriteLine(msj);
+                }
+
             }
+
+            Console.WriteLine("¡Base de datos Generada!");
+            Console.ReadLine();
+            
             
         }
     }
