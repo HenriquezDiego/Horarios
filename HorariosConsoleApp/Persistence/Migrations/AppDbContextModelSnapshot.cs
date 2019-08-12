@@ -318,6 +318,11 @@ namespace HorariosConsoleApp.Migrations
                         {
                             HoraId = 23,
                             Horaspan = new TimeSpan(0, 22, 0, 0, 0)
+                        },
+                        new
+                        {
+                            HoraId = 24,
+                            Horaspan = new TimeSpan(0, 23, 0, 0, 0)
                         });
                 });
 

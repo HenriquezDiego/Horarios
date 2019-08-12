@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HorariosConsoleApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190812191841_version1.1.1")]
-    partial class version111
+    [Migration("20190812214756_version1.1.2")]
+    partial class version112
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -320,6 +320,11 @@ namespace HorariosConsoleApp.Migrations
                         {
                             HoraId = 23,
                             Horaspan = new TimeSpan(0, 22, 0, 0, 0)
+                        },
+                        new
+                        {
+                            HoraId = 24,
+                            Horaspan = new TimeSpan(0, 23, 0, 0, 0)
                         });
                 });
 
@@ -351,6 +356,10 @@ namespace HorariosConsoleApp.Migrations
                     b.Property<int>("HorarioId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Abreviatura");
+
+                    b.Property<string>("Alias");
 
                     b.Property<string>("Descripcion");
 
@@ -495,7 +504,7 @@ namespace HorariosConsoleApp.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HorariosConsoleApp.Entities.Horario")
-                        .WithMany("HorarioFraccions")
+                        .WithMany("HorarioFraccion")
                         .HasForeignKey("HorarioId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });

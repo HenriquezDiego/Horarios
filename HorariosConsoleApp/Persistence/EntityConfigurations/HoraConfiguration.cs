@@ -16,7 +16,7 @@ namespace HorariosConsoleApp.Persistence.EntityConfigurations
         private static IEnumerable<Hora> GetListHoras()
         {
             List<Hora> listHoras = new List<Hora>();
-            for (var i = 0; i < 23; i++)
+            for (var i = 0; i < 24; i++)
             {
                 var  timeSpan = new TimeSpan(i,0,0);
                 var newHora = new Hora()

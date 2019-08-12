@@ -14,6 +14,7 @@ namespace HorariosConsoleApp
             using (var appDbContext = new AppDbContext())
             {
                 Console.WriteLine("Horarios Console App");
+
                 Console.WriteLine(@"Desea aplicar la ultima migración estable (y/n)?");
                 if (Console.ReadKey().Key == ConsoleKey.Y)
                 {

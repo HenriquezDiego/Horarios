@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HorariosConsoleApp.Migrations
 {
-    public partial class version111 : Migration
+    public partial class version112 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,6 +55,8 @@ namespace HorariosConsoleApp.Migrations
                 {
                     HorarioId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Alias = table.Column<string>(nullable: true),
+                    Abreviatura = table.Column<string>(nullable: true),
                     Descripcion = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -256,6 +258,7 @@ namespace HorariosConsoleApp.Migrations
                 columns: new[] { "HoraId", "Horaspan" },
                 values: new object[,]
                 {
+                    { 24, new TimeSpan(0, 23, 0, 0, 0) },
                     { 23, new TimeSpan(0, 22, 0, 0, 0) },
                     { 22, new TimeSpan(0, 21, 0, 0, 0) },
                     { 21, new TimeSpan(0, 20, 0, 0, 0) },
@@ -267,11 +270,11 @@ namespace HorariosConsoleApp.Migrations
                     { 15, new TimeSpan(0, 14, 0, 0, 0) },
                     { 14, new TimeSpan(0, 13, 0, 0, 0) },
                     { 13, new TimeSpan(0, 12, 0, 0, 0) },
-                    { 7, new TimeSpan(0, 6, 0, 0, 0) },
+                    { 8, new TimeSpan(0, 7, 0, 0, 0) },
                     { 11, new TimeSpan(0, 10, 0, 0, 0) },
                     { 10, new TimeSpan(0, 9, 0, 0, 0) },
                     { 9, new TimeSpan(0, 8, 0, 0, 0) },
-                    { 8, new TimeSpan(0, 7, 0, 0, 0) },
+                    { 7, new TimeSpan(0, 6, 0, 0, 0) },
                     { 6, new TimeSpan(0, 5, 0, 0, 0) },
                     { 5, new TimeSpan(0, 4, 0, 0, 0) },
                     { 4, new TimeSpan(0, 3, 0, 0, 0) },
