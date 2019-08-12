@@ -1,4 +1,5 @@
 ﻿using HorariosConsoleApp.Entities;
+using HorariosConsoleApp.Persistence.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace HorariosConsoleApp.Persistence
@@ -20,6 +21,14 @@ namespace HorariosConsoleApp.Persistence
         {
             optionsBuilder.UseSqlServer(
                 "server=localhost;Database=HorarioDb;Integrated Security=true;MultipleActiveResultSets=true;");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new EmpleadoConfiguration())
+                        .ApplyConfiguration(new EquipoConfiguration())
+                        .ApplyConfiguration(new HoraConfiguration())
+                        .ApplyConfiguration(new TipoHoraConfiguration());
         }
     }
 }

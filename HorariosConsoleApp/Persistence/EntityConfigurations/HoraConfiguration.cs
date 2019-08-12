@@ -10,17 +10,10 @@ namespace HorariosConsoleApp.Persistence.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Hora> builder)
         {
-            builder.HasData(new List<Hora>()
-            {
-                new Hora()
-                {
-                    HoraId = 1,
-                    
-                }
-            });
+            builder.HasData(GetListHoras());
         }
 
-        private List<Hora> GetListHoras()
+        private static IEnumerable<Hora> GetListHoras()
         {
             List<Hora> listHoras = new List<Hora>();
             for (var i = 0; i < 23; i++)
@@ -28,8 +21,10 @@ namespace HorariosConsoleApp.Persistence.EntityConfigurations
                 var  timeSpan = new TimeSpan(i,0,0);
                 var newHora = new Hora()
                 {
-                    HoraId = i
+                    HoraId = (i+1),
+                    Horaspan = timeSpan
                 };
+                listHoras.Add(newHora);
             }
 
             return listHoras;
