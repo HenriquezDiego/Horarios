@@ -1,10 +1,10 @@
 ﻿namespace HorariosConsoleApp.Entities
 {
-    public class HorarioDetalle
+    public class HoraDetalle
     {
-        public int HorarioDetalleId { get; set; }
+        public int HoraDetalleId { get; set; }
         public int HorarioId { get; set; }
-        public Horario Horario { get; set; }
+        public HorarioFraccion Horario { get; set; }
         public int HoraId { get; set; }
         public Hora Hora { get; set; }
         public int TipoHoraId { get; set; }
