@@ -28,7 +28,8 @@ namespace HorariosConsoleApp.Persistence
             modelBuilder.ApplyConfiguration(new EmpleadoConfiguration())
                         .ApplyConfiguration(new EquipoConfiguration())
                         .ApplyConfiguration(new HoraConfiguration())
-                        .ApplyConfiguration(new TipoHoraConfiguration());
+                        .ApplyConfiguration(new TipoHoraConfiguration())
+                        .ApplyConfiguration(new DiaConfiguration());
         }
     }
 }
