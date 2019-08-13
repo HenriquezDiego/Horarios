@@ -14,21 +14,25 @@ namespace HorariosConsoleApp.Persistence.EntityConfigurations
                  {
                      new Empleado()
                      {
+                         EmpleadoId = 1,
                          Nombre = "Juan",
                          Apellido = "Perez"
                      },
                      new Empleado()
                      {
+                         EmpleadoId = 2,
                          Nombre = "Kevin",
                          Apellido = "Mitnick"
                      },
                      new Empleado()
                      {
+                         EmpleadoId = 3,
                          Nombre = "Jose",
                          Apellido = "Quezada"
                      },
                      new Empleado()
                      {
+                         EmpleadoId = 4,
                          Nombre = "Juan",
                          Apellido = "Rulfo"
                      },

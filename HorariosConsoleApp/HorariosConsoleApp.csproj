@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Persistence\Migrations\20190812162234_v2.0.0.cs" />
+    <Compile Remove="Persistence\Migrations\20190812162444_v2.0.0.cs" />
+    <Compile Remove="Persistence\Migrations\20190812162952_v2.0.1.cs" />
+    <Compile Remove="Persistence\Migrations\20190812163327_v2.0.1.cs" />
+    <Compile Remove="Persistence\Migrations\20190812163945_v2.0.1.cs" />
+    <Compile Remove="Persistence\Migrations\20190812164230_v2.0.1.cs" />
+    <Compile Remove="Persistence\Migrations\20190812164326_v2.0.1.cs" />
+    <Compile Remove="Persistence\Migrations\20190812164501_v2.0.1.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
