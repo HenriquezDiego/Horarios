@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using HorariosConsoleApp.Helpers;
 
 namespace HorariosConsoleApp.Services
 {
@@ -166,12 +167,14 @@ namespace HorariosConsoleApp.Services
         {
             var horario = _dbContext.Horarios
                                             .Include(hr=> hr.HorarioFraccion)
+                                            .ThenInclude(frag=> frag.Dia)
                                             .FirstOrDefault(hr => hr.Abreviatura.Equals("I"));
 
             var fragmentosHorario = horario.HorarioFraccion;
             
             foreach (var fragmento in fragmentosHorario)
             {
+                var dia = fragmento.Dia.Abreviatura;
                 List<HoraDetalle> listHoras = new List<HoraDetalle>();
                 var hora = fragmento.HoraInicio.Hours;
                 var horaFin = fragmento.HoraFin.Hours;
@@ -181,25 +184,9 @@ namespace HorariosConsoleApp.Services
                     var detalleHora = new HoraDetalle()
                     {
                         Hora = new TimeSpan(hora,0,0),
-                        HorarioFraccionId = fragmento.HorarioFraccionId
+                        HorarioFraccionId = fragmento.HorarioFraccionId,
+                        TipoHoraId = Workday.CheckHour(hora,dia)
                     };
-                    if (hora == 22 || hora == 23 && hora > 0 && hora < 6 && fragmento.DiaId == 7)
-                    {
-                        detalleHora.TipoHoraId = 6;
-                    } 
-                    else if (hora > 5 &&hora < 22 && fragmento.DiaId == 7)
-                    {
-                        detalleHora.TipoHoraId = 5;
-                    }
-
-                    else if (hora > 22)
-                    {
-                        detalleHora.TipoHoraId = 2;
-                    }
-                    else
-                    {
-                        detalleHora.TipoHoraId = 1;
-                    }
                     listHoras.Add(detalleHora);
                     hora++;
                 }
