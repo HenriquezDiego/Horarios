@@ -4,14 +4,16 @@ using HorariosConsoleApp.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HorariosConsoleApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190812165540_v2.0.0")]
+    partial class v200
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,8 +46,6 @@ namespace HorariosConsoleApp.Migrations
 
                     b.Property<string>("Nombre");
 
-                    b.Property<decimal>("SalarioBase");
-
                     b.HasKey("EmpleadoId");
 
                     b.ToTable("Empleados");
@@ -55,29 +55,25 @@ namespace HorariosConsoleApp.Migrations
                         {
                             EmpleadoId = 1,
                             Apellido = "Perez",
-                            Nombre = "Juan",
-                            SalarioBase = 0m
+                            Nombre = "Juan"
                         },
                         new
                         {
                             EmpleadoId = 2,
                             Apellido = "Mitnick",
-                            Nombre = "Kevin",
-                            SalarioBase = 0m
+                            Nombre = "Kevin"
                         },
                         new
                         {
                             EmpleadoId = 3,
                             Apellido = "Quezada",
-                            Nombre = "Jose",
-                            SalarioBase = 0m
+                            Nombre = "Jose"
                         },
                         new
                         {
                             EmpleadoId = 4,
                             Apellido = "Rulfo",
-                            Nombre = "Juan",
-                            SalarioBase = 0m
+                            Nombre = "Juan"
                         });
                 });
 
@@ -157,15 +153,11 @@ namespace HorariosConsoleApp.Migrations
 
                     b.Property<int>("DiaId");
 
-                    b.Property<int>("HoraId");
-
                     b.Property<int?>("HorarioId");
 
                     b.HasKey("HorarioDetalleId");
 
                     b.HasIndex("DiaId");
-
-                    b.HasIndex("HoraId");
 
                     b.HasIndex("HorarioId");
 
@@ -225,11 +217,6 @@ namespace HorariosConsoleApp.Migrations
                     b.HasOne("HorariosConsoleApp.Entities.Dia", "Dia")
                         .WithMany()
                         .HasForeignKey("DiaId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("HorariosConsoleApp.Entities.Hora", "Hora")
-                        .WithMany()
-                        .HasForeignKey("HoraId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HorariosConsoleApp.Entities.Horario", "Horario")

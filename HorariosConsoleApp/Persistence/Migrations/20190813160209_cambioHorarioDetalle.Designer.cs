@@ -4,14 +4,16 @@ using HorariosConsoleApp.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HorariosConsoleApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190813160209_cambioHorarioDetalle")]
+    partial class cambioHorarioDetalle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,8 +46,6 @@ namespace HorariosConsoleApp.Migrations
 
                     b.Property<string>("Nombre");
 
-                    b.Property<decimal>("SalarioBase");
-
                     b.HasKey("EmpleadoId");
 
                     b.ToTable("Empleados");
@@ -55,29 +55,25 @@ namespace HorariosConsoleApp.Migrations
                         {
                             EmpleadoId = 1,
                             Apellido = "Perez",
-                            Nombre = "Juan",
-                            SalarioBase = 0m
+                            Nombre = "Juan"
                         },
                         new
                         {
                             EmpleadoId = 2,
                             Apellido = "Mitnick",
-                            Nombre = "Kevin",
-                            SalarioBase = 0m
+                            Nombre = "Kevin"
                         },
                         new
                         {
                             EmpleadoId = 3,
                             Apellido = "Quezada",
-                            Nombre = "Jose",
-                            SalarioBase = 0m
+                            Nombre = "Jose"
                         },
                         new
                         {
                             EmpleadoId = 4,
                             Apellido = "Rulfo",
-                            Nombre = "Juan",
-                            SalarioBase = 0m
+                            Nombre = "Juan"
                         });
                 });
 
