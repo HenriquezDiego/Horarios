@@ -12,7 +12,6 @@ namespace HorariosConsoleApp.Persistence
         public DbSet<Equipo> Equipos { get; set; }
         public DbSet<HoraDetalle> HoraDetalles { get; set; }
         public DbSet<HorarioFraccion> HorarioFraccion { get; set; }
-        public DbSet<Hora> Horas { get; set; }
         public DbSet<TipoHora> TipoHoras { get; set; }
         public DbSet<Dia> Dias { get; set; }
         public DbSet<EquipoHorario> EquipoHorarios { get; set; }
@@ -22,7 +21,7 @@ namespace HorariosConsoleApp.Persistence
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "server=localhost;Database=HorarioDb;Integrated Security=true;MultipleActiveResultSets=true;");
+                "server=localhost;Database=HorarioDbV1.1.4;Integrated Security=true;MultipleActiveResultSets=true;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -33,7 +32,6 @@ namespace HorariosConsoleApp.Persistence
             }
             modelBuilder.ApplyConfiguration(new EmpleadoConfiguration())
                         .ApplyConfiguration(new EquipoConfiguration())
-                        .ApplyConfiguration(new HoraConfiguration())
                         .ApplyConfiguration(new TipoHoraConfiguration())
                         .ApplyConfiguration(new DiaConfiguration());
         }

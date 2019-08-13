@@ -191,156 +191,19 @@ namespace HorariosConsoleApp.Migrations
                     b.ToTable("EquipoHorarios");
                 });
 
-            modelBuilder.Entity("HorariosConsoleApp.Entities.Hora", b =>
-                {
-                    b.Property<int>("HoraId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<TimeSpan>("Horaspan");
-
-                    b.HasKey("HoraId");
-
-                    b.ToTable("Horas");
-
-                    b.HasData(
-                        new
-                        {
-                            HoraId = 1,
-                            Horaspan = new TimeSpan(0, 0, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 2,
-                            Horaspan = new TimeSpan(0, 1, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 3,
-                            Horaspan = new TimeSpan(0, 2, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 4,
-                            Horaspan = new TimeSpan(0, 3, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 5,
-                            Horaspan = new TimeSpan(0, 4, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 6,
-                            Horaspan = new TimeSpan(0, 5, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 7,
-                            Horaspan = new TimeSpan(0, 6, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 8,
-                            Horaspan = new TimeSpan(0, 7, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 9,
-                            Horaspan = new TimeSpan(0, 8, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 10,
-                            Horaspan = new TimeSpan(0, 9, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 11,
-                            Horaspan = new TimeSpan(0, 10, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 12,
-                            Horaspan = new TimeSpan(0, 11, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 13,
-                            Horaspan = new TimeSpan(0, 12, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 14,
-                            Horaspan = new TimeSpan(0, 13, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 15,
-                            Horaspan = new TimeSpan(0, 14, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 16,
-                            Horaspan = new TimeSpan(0, 15, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 17,
-                            Horaspan = new TimeSpan(0, 16, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 18,
-                            Horaspan = new TimeSpan(0, 17, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 19,
-                            Horaspan = new TimeSpan(0, 18, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 20,
-                            Horaspan = new TimeSpan(0, 19, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 21,
-                            Horaspan = new TimeSpan(0, 20, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 22,
-                            Horaspan = new TimeSpan(0, 21, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 23,
-                            Horaspan = new TimeSpan(0, 22, 0, 0, 0)
-                        },
-                        new
-                        {
-                            HoraId = 24,
-                            Horaspan = new TimeSpan(0, 23, 0, 0, 0)
-                        });
-                });
-
             modelBuilder.Entity("HorariosConsoleApp.Entities.HoraDetalle", b =>
                 {
                     b.Property<int>("HoraDetalleId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("HoraId");
+                    b.Property<TimeSpan>("Hora");
 
                     b.Property<int>("HorarioFraccionId");
 
                     b.Property<int>("TipoHoraId");
 
                     b.HasKey("HoraDetalleId");
-
-                    b.HasIndex("HoraId");
 
                     b.HasIndex("HorarioFraccionId");
 
@@ -374,19 +237,15 @@ namespace HorariosConsoleApp.Migrations
 
                     b.Property<int>("DiaId");
 
-                    b.Property<int?>("HoraFinId");
+                    b.Property<TimeSpan>("HoraFin");
 
-                    b.Property<int?>("HoraInicioId");
+                    b.Property<TimeSpan>("HoraInicio");
 
                     b.Property<int?>("HorarioId");
 
                     b.HasKey("HorarioFraccionId");
 
                     b.HasIndex("DiaId");
-
-                    b.HasIndex("HoraFinId");
-
-                    b.HasIndex("HoraInicioId");
 
                     b.HasIndex("HorarioId");
 
@@ -411,32 +270,62 @@ namespace HorariosConsoleApp.Migrations
                         new
                         {
                             TipoHoraId = 1,
-                            Nombre = "Hora Extra Ordinaria Diurna",
-                            PorcentajeExtra = 100m
+                            Nombre = "Hora Ordinaria Diura",
+                            PorcentajeExtra = 0m
                         },
                         new
                         {
                             TipoHoraId = 2,
-                            Nombre = "Hora Extra  Nocturna",
-                            PorcentajeExtra = 125m
-                        },
-                        new
-                        {
-                            TipoHoraId = 3,
-                            Nombre = "Hora Ordinaria Nocturana",
+                            Nombre = "Hora Ordinaria Nocturna",
                             PorcentajeExtra = 25m
                         },
                         new
                         {
+                            TipoHoraId = 3,
+                            Nombre = "Hora Extra Diura",
+                            PorcentajeExtra = 200m
+                        },
+                        new
+                        {
                             TipoHoraId = 4,
-                            Nombre = "Domingo Hora Ordinaria Diurna",
-                            PorcentajeExtra = 300m
+                            Nombre = "Hora Extra Nocturna",
+                            PorcentajeExtra = 250m
                         },
                         new
                         {
                             TipoHoraId = 5,
-                            Nombre = "Hora Ordinaria Diura",
+                            Nombre = "Hora Ordinaria Diurna Sabado",
                             PorcentajeExtra = 0m
+                        },
+                        new
+                        {
+                            TipoHoraId = 6,
+                            Nombre = "Hora Ordinaria Nocturna Sabado",
+                            PorcentajeExtra = 25m
+                        },
+                        new
+                        {
+                            TipoHoraId = 7,
+                            Nombre = "Hora Ordinaria Diurna Domingo",
+                            PorcentajeExtra = 150m
+                        },
+                        new
+                        {
+                            TipoHoraId = 8,
+                            Nombre = "Hora Ordinaria Nocturna Domingo",
+                            PorcentajeExtra = 175m
+                        },
+                        new
+                        {
+                            TipoHoraId = 9,
+                            Nombre = "Hora Extra Diurna Domingo",
+                            PorcentajeExtra = 300m
+                        },
+                        new
+                        {
+                            TipoHoraId = 10,
+                            Nombre = "Hora Extra Nocturna Domingo",
+                            PorcentajeExtra = 350m
                         });
                 });
 
@@ -468,11 +357,6 @@ namespace HorariosConsoleApp.Migrations
 
             modelBuilder.Entity("HorariosConsoleApp.Entities.HoraDetalle", b =>
                 {
-                    b.HasOne("HorariosConsoleApp.Entities.Hora", "Hora")
-                        .WithMany()
-                        .HasForeignKey("HoraId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("HorariosConsoleApp.Entities.HorarioFraccion", "HorarioFraccion")
                         .WithMany()
                         .HasForeignKey("HorarioFraccionId")
@@ -489,16 +373,6 @@ namespace HorariosConsoleApp.Migrations
                     b.HasOne("HorariosConsoleApp.Entities.Dia", "Dia")
                         .WithMany()
                         .HasForeignKey("DiaId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("HorariosConsoleApp.Entities.Hora", "HoraFin")
-                        .WithMany()
-                        .HasForeignKey("HoraFinId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("HorariosConsoleApp.Entities.Hora", "HoraInicio")
-                        .WithMany()
-                        .HasForeignKey("HoraInicioId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HorariosConsoleApp.Entities.Horario")

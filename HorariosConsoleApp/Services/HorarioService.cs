@@ -1,5 +1,7 @@
 ﻿using HorariosConsoleApp.Entities;
 using HorariosConsoleApp.Persistence;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -58,14 +60,14 @@ namespace HorariosConsoleApp.Services
                             new HorarioFraccion()
                             {
                                 DiaId = dia.DiaId,
-                                HoraInicioId = 7,
-                                HoraFinId = 11,
+                                HoraInicio = new TimeSpan(6,0,0),
+                                HoraFin = new TimeSpan(10,0,0),
                             },
                             new HorarioFraccion()
                             {
                                 DiaId = dia.DiaId,
-                                HoraInicioId = 19,
-                                HoraFinId = 24,
+                                HoraInicio = new TimeSpan(18,0,0),
+                                HoraFin = new TimeSpan(23,59,59),
                             }
                         }
                     );
@@ -78,8 +80,8 @@ namespace HorariosConsoleApp.Services
                             new HorarioFraccion()
                             {
                                 DiaId = dia.DiaId,
-                                HoraInicioId = 1,
-                                HoraFinId = 7,
+                                HoraInicio = new TimeSpan(0,0,0),
+                                HoraFin = new TimeSpan(6,0,0),
                             }  
                         
                     );
@@ -90,8 +92,8 @@ namespace HorariosConsoleApp.Services
                     var horarioFraccion = new HorarioFraccion()
                     {
                         DiaId = dia.DiaId,
-                        HoraInicioId = 7,
-                        HoraFinId = 15,
+                        HoraInicio = new TimeSpan(6,0,0),
+                        HoraFin = new TimeSpan(14,0,0),
                     };
                 
                     horarioFraccionList.Add(horarioFraccion);
@@ -116,10 +118,13 @@ namespace HorariosConsoleApp.Services
         {
             var horarios = _dbContext.Horarios.ToList();
             var horarioFraccion = _dbContext.HorarioFraccion.ToList();
+            var detallehoras = _dbContext.HoraDetalles.ToList();
             if (horarios.Count > 0 && horarioFraccion.Count > 0)
             {
+                _dbContext.HoraDetalles.RemoveRange(detallehoras);
                 _dbContext.HorarioFraccion.RemoveRange(horarioFraccion);
                 _dbContext.Horarios.RemoveRange(horarios);
+
             }
 
             if (_dbContext.SaveChanges() <= 0)
@@ -148,8 +153,64 @@ namespace HorariosConsoleApp.Services
                 _messages.Add("Se ha ingresado los horarios fraccionados");
             }
 
+            if (GenerarHoraDetalle())
+            {
+                _messages.Add("Horas detalle ingresadas");
+            }
+
             return _messages;
 
+        }
+
+        public bool GenerarHoraDetalle()
+        {
+            var horario = _dbContext.Horarios
+                                            .Include(hr=> hr.HorarioFraccion)
+                                            .FirstOrDefault(hr => hr.Abreviatura.Equals("I"));
+
+            var fragmentosHorario = horario.HorarioFraccion;
+            
+            foreach (var fragmento in fragmentosHorario)
+            {
+                List<HoraDetalle> listHoras = new List<HoraDetalle>();
+                var hora = fragmento.HoraInicio.Hours;
+                var horaFin = fragmento.HoraFin.Hours;
+
+                while (hora <= horaFin)
+                {
+                    var detalleHora = new HoraDetalle()
+                    {
+                        Hora = new TimeSpan(hora,0,0),
+                        HorarioFraccionId = fragmento.HorarioFraccionId
+                    };
+                    if (hora == 22 || hora == 23 && hora > 0 && hora < 6 && fragmento.DiaId == 7)
+                    {
+                        detalleHora.TipoHoraId = 6;
+                    } 
+                    else if (hora > 5 &&hora < 22 && fragmento.DiaId == 7)
+                    {
+                        detalleHora.TipoHoraId = 5;
+                    }
+
+                    else if (hora > 22)
+                    {
+                        detalleHora.TipoHoraId = 2;
+                    }
+                    else
+                    {
+                        detalleHora.TipoHoraId = 1;
+                    }
+                    listHoras.Add(detalleHora);
+                    hora++;
+                }
+
+                _dbContext.HoraDetalles.AddRange(listHoras);
+                if (_dbContext.SaveChanges() < 0)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

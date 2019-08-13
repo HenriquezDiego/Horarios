@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HorariosConsoleApp.Migrations
 {
-    public partial class version112 : Migration
+    public partial class Version114 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -62,19 +62,6 @@ namespace HorariosConsoleApp.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Horarios", x => x.HorarioId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Horas",
-                columns: table => new
-                {
-                    HoraId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Horaspan = table.Column<TimeSpan>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Horas", x => x.HoraId);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,8 +139,8 @@ namespace HorariosConsoleApp.Migrations
                     HorarioFraccionId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DiaId = table.Column<int>(nullable: false),
-                    HoraInicioId = table.Column<int>(nullable: true),
-                    HoraFinId = table.Column<int>(nullable: true),
+                    HoraInicio = table.Column<TimeSpan>(nullable: false),
+                    HoraFin = table.Column<TimeSpan>(nullable: false),
                     HorarioId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -164,18 +151,6 @@ namespace HorariosConsoleApp.Migrations
                         column: x => x.DiaId,
                         principalTable: "Dias",
                         principalColumn: "DiaId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_HorarioFraccion_Horas_HoraFinId",
-                        column: x => x.HoraFinId,
-                        principalTable: "Horas",
-                        principalColumn: "HoraId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_HorarioFraccion_Horas_HoraInicioId",
-                        column: x => x.HoraInicioId,
-                        principalTable: "Horas",
-                        principalColumn: "HoraId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_HorarioFraccion_Horarios_HorarioId",
@@ -192,18 +167,12 @@ namespace HorariosConsoleApp.Migrations
                     HoraDetalleId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     HorarioFraccionId = table.Column<int>(nullable: false),
-                    HoraId = table.Column<int>(nullable: false),
+                    Hora = table.Column<TimeSpan>(nullable: false),
                     TipoHoraId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_HoraDetalles", x => x.HoraDetalleId);
-                    table.ForeignKey(
-                        name: "FK_HoraDetalles_Horas_HoraId",
-                        column: x => x.HoraId,
-                        principalTable: "Horas",
-                        principalColumn: "HoraId",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_HoraDetalles_HorarioFraccion_HorarioFraccionId",
                         column: x => x.HorarioFraccionId,
@@ -249,39 +218,8 @@ namespace HorariosConsoleApp.Migrations
                 values: new object[,]
                 {
                     { 3, "Ranger" },
-                    { 2, "Bravo" },
-                    { 1, "Zebra" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Horas",
-                columns: new[] { "HoraId", "Horaspan" },
-                values: new object[,]
-                {
-                    { 24, new TimeSpan(0, 23, 0, 0, 0) },
-                    { 23, new TimeSpan(0, 22, 0, 0, 0) },
-                    { 22, new TimeSpan(0, 21, 0, 0, 0) },
-                    { 21, new TimeSpan(0, 20, 0, 0, 0) },
-                    { 20, new TimeSpan(0, 19, 0, 0, 0) },
-                    { 19, new TimeSpan(0, 18, 0, 0, 0) },
-                    { 18, new TimeSpan(0, 17, 0, 0, 0) },
-                    { 17, new TimeSpan(0, 16, 0, 0, 0) },
-                    { 16, new TimeSpan(0, 15, 0, 0, 0) },
-                    { 15, new TimeSpan(0, 14, 0, 0, 0) },
-                    { 14, new TimeSpan(0, 13, 0, 0, 0) },
-                    { 13, new TimeSpan(0, 12, 0, 0, 0) },
-                    { 8, new TimeSpan(0, 7, 0, 0, 0) },
-                    { 11, new TimeSpan(0, 10, 0, 0, 0) },
-                    { 10, new TimeSpan(0, 9, 0, 0, 0) },
-                    { 9, new TimeSpan(0, 8, 0, 0, 0) },
-                    { 7, new TimeSpan(0, 6, 0, 0, 0) },
-                    { 6, new TimeSpan(0, 5, 0, 0, 0) },
-                    { 5, new TimeSpan(0, 4, 0, 0, 0) },
-                    { 4, new TimeSpan(0, 3, 0, 0, 0) },
-                    { 3, new TimeSpan(0, 2, 0, 0, 0) },
-                    { 2, new TimeSpan(0, 1, 0, 0, 0) },
-                    { 1, new TimeSpan(0, 0, 0, 0, 0) },
-                    { 12, new TimeSpan(0, 11, 0, 0, 0) }
+                    { 1, "Zebra" },
+                    { 2, "Bravo" }
                 });
 
             migrationBuilder.InsertData(
@@ -289,11 +227,16 @@ namespace HorariosConsoleApp.Migrations
                 columns: new[] { "TipoHoraId", "Nombre", "PorcentajeExtra" },
                 values: new object[,]
                 {
-                    { 4, "Domingo Hora Ordinaria Diurna", 300m },
-                    { 1, "Hora Extra Ordinaria Diurna", 100m },
-                    { 2, "Hora Extra  Nocturna", 125m },
-                    { 3, "Hora Ordinaria Nocturana", 25m },
-                    { 5, "Hora Ordinaria Diura", 0m }
+                    { 9, "Hora Extra Diurna Domingo", 300m },
+                    { 1, "Hora Ordinaria Diura", 0m },
+                    { 2, "Hora Ordinaria Nocturna", 25m },
+                    { 3, "Hora Extra Diura", 200m },
+                    { 4, "Hora Extra Nocturna", 250m },
+                    { 5, "Hora Ordinaria Diurna Sabado", 0m },
+                    { 6, "Hora Ordinaria Nocturna Sabado", 25m },
+                    { 7, "Hora Ordinaria Diurna Domingo", 150m },
+                    { 8, "Hora Ordinaria Nocturna Domingo", 175m },
+                    { 10, "Hora Extra Nocturna Domingo", 350m }
                 });
 
             migrationBuilder.CreateIndex(
@@ -317,11 +260,6 @@ namespace HorariosConsoleApp.Migrations
                 column: "HorarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HoraDetalles_HoraId",
-                table: "HoraDetalles",
-                column: "HoraId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_HoraDetalles_HorarioFraccionId",
                 table: "HoraDetalles",
                 column: "HorarioFraccionId");
@@ -335,16 +273,6 @@ namespace HorariosConsoleApp.Migrations
                 name: "IX_HorarioFraccion_DiaId",
                 table: "HorarioFraccion",
                 column: "DiaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_HorarioFraccion_HoraFinId",
-                table: "HorarioFraccion",
-                column: "HoraFinId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_HorarioFraccion_HoraInicioId",
-                table: "HorarioFraccion",
-                column: "HoraInicioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HorarioFraccion_HorarioId",
@@ -377,9 +305,6 @@ namespace HorariosConsoleApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "Dias");
-
-            migrationBuilder.DropTable(
-                name: "Horas");
 
             migrationBuilder.DropTable(
                 name: "Horarios");
