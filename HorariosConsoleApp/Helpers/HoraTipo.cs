@@ -22,7 +22,7 @@
         /// </summary>
         Hen = 4,
         /// <summary>
-        /// "Hora Ordinaria Diurna Sabado
+        /// Hora Ordinaria Diurna Sabado
         /// </summary>
         Hds = 5,
         /// <summary>
