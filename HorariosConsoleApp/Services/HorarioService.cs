@@ -21,7 +21,6 @@ namespace HorariosConsoleApp.Services
         private void GenerateHorarioFraccion()
         {
             var horarioDetalleServices = new HorarioDetalleServices(_dbContext);
-            horarioDetalleServices.GenerarEmpleadoEquipos();
             horarioDetalleServices.HorarioFraccionA();
             horarioDetalleServices.HorarioFraccionB();
             horarioDetalleServices.HorarioFraccionC();
@@ -91,7 +90,9 @@ namespace HorariosConsoleApp.Services
             {
                 _messages.Add("Base de datos preparada");
             }
-            
+            var empleadoServices = new EmpleadoServices(_dbContext);
+            empleadoServices.Seed();
+
             GenerateHorarioFraccion();
             if (GenerarHoraDetalle("I")
             &&GenerarHoraDetalle("II")

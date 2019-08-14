@@ -14,7 +14,6 @@ namespace HorariosConsoleApp.Services
             _dbContext = dbContext;
            
         }
-
         public bool HorarioFraccionA()
         {
             var semanaDias = _dbContext.Dias.ToList();
@@ -209,33 +208,6 @@ namespace HorariosConsoleApp.Services
             }
 
             return false;
-        }
-
-        public void GenerarEmpleadoEquipos()
-        {
-            var list = new List<EmpleadoEquipo>();
-            for (var i = 1; i < 5; i++)
-            {
-                var row = new EmpleadoEquipo()
-                {
-                    EmpleadoId = i,
-                    EquipoId = 1
-                };
-                list.Add(row);
-            }
-            for (var i = 5; i < 9; i++)
-            {
-                var row = new EmpleadoEquipo()
-                {
-                    EmpleadoId = i,
-                    EquipoId = (i>6)?2:3
-                };
-                list.Add(row);
-            }
-            
-            
-            _dbContext.EmpleadosEquipos.AddRange(list);
-            _dbContext.SaveChanges();
         }
     }
 }

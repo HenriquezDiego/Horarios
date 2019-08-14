@@ -1,0 +1,199 @@
+{
+    "Equipos":[
+      {
+        "EquipoId": 0,
+        "Nombre": "Bravo",
+        "HorarioId": 1,
+        "Empleados": [
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Donando Alexander",
+            "Apellido": "Menéndez Rodríguez",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Oscar Humberto",
+            "Apellido": "Canales Mejía",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Brahan Edenilson",
+            "Apellido": "Capacho Corado",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Samuel García",
+            "Apellido": "Flores",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "César Humberto",
+            "Apellido": "Zetino",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Raúl Ernesto",
+            "Apellido": "Ardón",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Óscar Armando",
+            "Apellido": "Landaverde",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Francisco Javier",
+            "Apellido": "Centeno Morales",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Juan Francisco",
+            "Apellido": "Rugamas",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Tito",
+            "Apellido": "Garcí",
+            "SalarioBase": 304
+          }
+        ]
+      },
+      {
+        "EquipoId": 0,
+        "Nombre": "Cobra",
+        "HorarioId": 2,
+        "Empleados": [
+          {
+            "EmpleadoId": 0,
+            "Nombre": " Mario Alfredo",
+            "Apellido": "Salazar Cruz",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Carlos Ernesto",
+            "Apellido": "Ruiz",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Dennys",
+            "Apellido": "Pacheco",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "José Orlando",
+            "Apellido": "Martínez Cerritos",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Robin Orlando",
+            "Apellido": "García Portillo",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Roque",
+            "Apellido": "Salazar",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Rubén",
+            "Apellido": "Zepeda",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Julio",
+            "Apellido": "Sarceño",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "José Alberto",
+            "Apellido": "García",
+            "SalarioBase": 304
+          }
+        ]
+      },
+      {
+        "EquipoId": 0,
+        "Nombre": "Zebra",
+        "HorarioId": 3,
+        "Empleados": [
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Arturo Ramón",
+            "Apellido": "Godoy",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Fausto Evelio",
+            "Apellido": "Ávila Solís",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Nelson de Jesús",
+            "Apellido": "Morán Moto",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Juan Carlos",
+            "Apellido": "Sorto",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Nervin  Francisco",
+            "Apellido": "Valiente Salazar",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Eberto",
+            "Apellido": "Salazar",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Rubén",
+            "Apellido": "Guerra Cabrera",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "José Arturo",
+            "Apellido": "Salguero Zepeda",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Oscar Antonio",
+            "Apellido": "Siliezar Pineda",
+            "SalarioBase": 304
+          },
+          {
+            "EmpleadoId": 0,
+            "Nombre": "Jorge Alberto",
+            "Apellido": "Mendoza Ordoñez",
+            "SalarioBase": 304
+          }
+        ]
+      }
+    ]
+}
