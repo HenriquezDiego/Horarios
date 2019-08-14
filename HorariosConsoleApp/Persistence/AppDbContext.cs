@@ -21,7 +21,7 @@ namespace HorariosConsoleApp.Persistence
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "server=localhost;Database=HorarioDbV1.1.4;Integrated Security=true;MultipleActiveResultSets=true;");
+                "server=localhost;Database=HorarioDbV1.1.6;Integrated Security=true;MultipleActiveResultSets=true;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,9 +30,10 @@ namespace HorariosConsoleApp.Persistence
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
-            modelBuilder.ApplyConfiguration(new EmpleadoConfiguration())
+            modelBuilder.ApplyConfiguration(new EmpleadoConfig())
                         .ApplyConfiguration(new EquipoConfiguration())
-                        .ApplyConfiguration(new TipoHoraConfiguration())
+                        .ApplyConfiguration(new TipoHoraConfig())
+                        .ApplyConfiguration(new HorarioConfig())
                         .ApplyConfiguration(new DiaConfiguration());
         }
     }

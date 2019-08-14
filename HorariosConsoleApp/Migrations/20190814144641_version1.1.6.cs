@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HorariosConsoleApp.Migrations
 {
-    public partial class Version114 : Migration
+    public partial class Version116 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,24 +29,12 @@ namespace HorariosConsoleApp.Migrations
                     EmpleadoId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Nombre = table.Column<string>(nullable: true),
-                    Apellido = table.Column<string>(nullable: true)
+                    Apellido = table.Column<string>(nullable: true),
+                    SalarioBase = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Empleados", x => x.EmpleadoId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Equipos",
-                columns: table => new
-                {
-                    EquipoId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Nombre = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Equipos", x => x.EquipoId);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,53 +67,19 @@ namespace HorariosConsoleApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmpleadosEquipos",
+                name: "Equipos",
                 columns: table => new
                 {
-                    EmpleadoEquipoId = table.Column<int>(nullable: false)
+                    EquipoId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    EquipoId = table.Column<int>(nullable: false),
-                    EmpleadoId = table.Column<int>(nullable: false),
-                    Fecha = table.Column<DateTime>(nullable: false)
+                    Nombre = table.Column<string>(nullable: true),
+                    HorarioId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmpleadosEquipos", x => x.EmpleadoEquipoId);
+                    table.PrimaryKey("PK_Equipos", x => x.EquipoId);
                     table.ForeignKey(
-                        name: "FK_EmpleadosEquipos_Empleados_EmpleadoId",
-                        column: x => x.EmpleadoId,
-                        principalTable: "Empleados",
-                        principalColumn: "EmpleadoId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_EmpleadosEquipos_Equipos_EquipoId",
-                        column: x => x.EquipoId,
-                        principalTable: "Equipos",
-                        principalColumn: "EquipoId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "EquipoHorarios",
-                columns: table => new
-                {
-                    EquipoHorarioId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    EquipoId = table.Column<int>(nullable: false),
-                    HorarioId = table.Column<int>(nullable: false),
-                    Fecha = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EquipoHorarios", x => x.EquipoHorarioId);
-                    table.ForeignKey(
-                        name: "FK_EquipoHorarios_Equipos_EquipoId",
-                        column: x => x.EquipoId,
-                        principalTable: "Equipos",
-                        principalColumn: "EquipoId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_EquipoHorarios_Horarios_HorarioId",
+                        name: "FK_Equipos_Horarios_HorarioId",
                         column: x => x.HorarioId,
                         principalTable: "Horarios",
                         principalColumn: "HorarioId",
@@ -154,6 +108,58 @@ namespace HorariosConsoleApp.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_HorarioFraccion_Horarios_HorarioId",
+                        column: x => x.HorarioId,
+                        principalTable: "Horarios",
+                        principalColumn: "HorarioId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EmpleadosEquipos",
+                columns: table => new
+                {
+                    EmpleadoEquipoId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    EquipoId = table.Column<int>(nullable: false),
+                    EmpleadoId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmpleadosEquipos", x => x.EmpleadoEquipoId);
+                    table.ForeignKey(
+                        name: "FK_EmpleadosEquipos_Empleados_EmpleadoId",
+                        column: x => x.EmpleadoId,
+                        principalTable: "Empleados",
+                        principalColumn: "EmpleadoId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_EmpleadosEquipos_Equipos_EquipoId",
+                        column: x => x.EquipoId,
+                        principalTable: "Equipos",
+                        principalColumn: "EquipoId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EquipoHorarios",
+                columns: table => new
+                {
+                    EquipoHorarioId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    EquipoId = table.Column<int>(nullable: false),
+                    HorarioId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EquipoHorarios", x => x.EquipoHorarioId);
+                    table.ForeignKey(
+                        name: "FK_EquipoHorarios_Equipos_EquipoId",
+                        column: x => x.EquipoId,
+                        principalTable: "Equipos",
+                        principalColumn: "EquipoId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_EquipoHorarios_Horarios_HorarioId",
                         column: x => x.HorarioId,
                         principalTable: "Horarios",
                         principalColumn: "HorarioId",
@@ -203,23 +209,37 @@ namespace HorariosConsoleApp.Migrations
 
             migrationBuilder.InsertData(
                 table: "Empleados",
-                columns: new[] { "EmpleadoId", "Apellido", "Nombre" },
+                columns: new[] { "EmpleadoId", "Apellido", "Nombre", "SalarioBase" },
                 values: new object[,]
                 {
-                    { 1, "Perez", "Juan" },
-                    { 2, "Mitnick", "Kevin" },
-                    { 3, "Quezada", "Jose" },
-                    { 4, "Rulfo", "Juan" }
+                    { 1, "Perez", "Juan", 100m },
+                    { 2, "Mitnick", "Kevin", 100m },
+                    { 3, "Quezada", "Jose", 700m },
+                    { 4, "Rulfo", "Juan", 700m },
+                    { 5, "García", "Francisco", 100m },
+                    { 6, "Hernandez", "Tito", 700m },
+                    { 7, "Rendon", "Pedro", 700m },
+                    { 8, "Gonzales", "Elmer", 700m }
                 });
 
             migrationBuilder.InsertData(
                 table: "Equipos",
-                columns: new[] { "EquipoId", "Nombre" },
+                columns: new[] { "EquipoId", "HorarioId", "Nombre" },
                 values: new object[,]
                 {
-                    { 3, "Ranger" },
-                    { 1, "Zebra" },
-                    { 2, "Bravo" }
+                    { 3, null, "Zebra" },
+                    { 1, null, "Bravo" },
+                    { 2, null, "Cobra" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Horarios",
+                columns: new[] { "HorarioId", "Abreviatura", "Alias", "Descripcion" },
+                values: new object[,]
+                {
+                    { 1, "I", "Azul", "Lunes a viernes de 6:00 am a 2:00 pmSabado de 6:00 am a 10:00 am y 6:00 pm 6:00 am" },
+                    { 2, "II", "Rojo", "Lunes a viernes de 2:00 am a 10:00 pmSabado de 10:00 am a 2:00 am y Domingo 6:00 am 6:00 pm" },
+                    { 3, "III", "Negro", "Lunes a viernes de 10:00 pm a 6:00 amSabado de 2:00 pm a 6:00 am y Domingo 6:00 pm 6:00 am" }
                 });
 
             migrationBuilder.InsertData(
@@ -257,6 +277,11 @@ namespace HorariosConsoleApp.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_EquipoHorarios_HorarioId",
                 table: "EquipoHorarios",
+                column: "HorarioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Equipos_HorarioId",
+                table: "Equipos",
                 column: "HorarioId");
 
             migrationBuilder.CreateIndex(

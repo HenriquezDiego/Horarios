@@ -4,14 +4,16 @@ using HorariosConsoleApp.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HorariosConsoleApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190814144641_version1.1.6")]
+    partial class Version116
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,6 +90,8 @@ namespace HorariosConsoleApp.Migrations
 
                     b.Property<string>("Nombre");
 
+                    b.Property<decimal>("SalarioBase");
+
                     b.HasKey("EmpleadoId");
 
                     b.ToTable("Empleados");
@@ -97,25 +101,57 @@ namespace HorariosConsoleApp.Migrations
                         {
                             EmpleadoId = 1,
                             Apellido = "Perez",
-                            Nombre = "Juan"
+                            Nombre = "Juan",
+                            SalarioBase = 100m
                         },
                         new
                         {
                             EmpleadoId = 2,
                             Apellido = "Mitnick",
-                            Nombre = "Kevin"
+                            Nombre = "Kevin",
+                            SalarioBase = 100m
                         },
                         new
                         {
                             EmpleadoId = 3,
                             Apellido = "Quezada",
-                            Nombre = "Jose"
+                            Nombre = "Jose",
+                            SalarioBase = 700m
                         },
                         new
                         {
                             EmpleadoId = 4,
                             Apellido = "Rulfo",
-                            Nombre = "Juan"
+                            Nombre = "Juan",
+                            SalarioBase = 700m
+                        },
+                        new
+                        {
+                            EmpleadoId = 5,
+                            Apellido = "García",
+                            Nombre = "Francisco",
+                            SalarioBase = 100m
+                        },
+                        new
+                        {
+                            EmpleadoId = 6,
+                            Apellido = "Hernandez",
+                            Nombre = "Tito",
+                            SalarioBase = 700m
+                        },
+                        new
+                        {
+                            EmpleadoId = 7,
+                            Apellido = "Rendon",
+                            Nombre = "Pedro",
+                            SalarioBase = 700m
+                        },
+                        new
+                        {
+                            EmpleadoId = 8,
+                            Apellido = "Gonzales",
+                            Nombre = "Elmer",
+                            SalarioBase = 700m
                         });
                 });
 
@@ -128,8 +164,6 @@ namespace HorariosConsoleApp.Migrations
                     b.Property<int>("EmpleadoId");
 
                     b.Property<int>("EquipoId");
-
-                    b.Property<DateTime>("Fecha");
 
                     b.HasKey("EmpleadoEquipoId");
 
@@ -146,9 +180,13 @@ namespace HorariosConsoleApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("HorarioId");
+
                     b.Property<string>("Nombre");
 
                     b.HasKey("EquipoId");
+
+                    b.HasIndex("HorarioId");
 
                     b.ToTable("Equipos");
 
@@ -156,17 +194,17 @@ namespace HorariosConsoleApp.Migrations
                         new
                         {
                             EquipoId = 1,
-                            Nombre = "Zebra"
-                        },
-                        new
-                        {
-                            EquipoId = 2,
                             Nombre = "Bravo"
                         },
                         new
                         {
+                            EquipoId = 2,
+                            Nombre = "Cobra"
+                        },
+                        new
+                        {
                             EquipoId = 3,
-                            Nombre = "Ranger"
+                            Nombre = "Zebra"
                         });
                 });
 
@@ -178,9 +216,7 @@ namespace HorariosConsoleApp.Migrations
 
                     b.Property<int>("EquipoId");
 
-                    b.Property<DateTime>("Fecha");
-
-                    b.Property<int>("HorarioId");
+                    b.Property<int?>("HorarioId");
 
                     b.HasKey("EquipoHorarioId");
 
@@ -227,6 +263,29 @@ namespace HorariosConsoleApp.Migrations
                     b.HasKey("HorarioId");
 
                     b.ToTable("Horarios");
+
+                    b.HasData(
+                        new
+                        {
+                            HorarioId = 1,
+                            Abreviatura = "I",
+                            Alias = "Azul",
+                            Descripcion = "Lunes a viernes de 6:00 am a 2:00 pmSabado de 6:00 am a 10:00 am y 6:00 pm 6:00 am"
+                        },
+                        new
+                        {
+                            HorarioId = 2,
+                            Abreviatura = "II",
+                            Alias = "Rojo",
+                            Descripcion = "Lunes a viernes de 2:00 am a 10:00 pmSabado de 10:00 am a 2:00 am y Domingo 6:00 am 6:00 pm"
+                        },
+                        new
+                        {
+                            HorarioId = 3,
+                            Abreviatura = "III",
+                            Alias = "Negro",
+                            Descripcion = "Lunes a viernes de 10:00 pm a 6:00 amSabado de 2:00 pm a 6:00 am y Domingo 6:00 pm 6:00 am"
+                        });
                 });
 
             modelBuilder.Entity("HorariosConsoleApp.Entities.HorarioFraccion", b =>
@@ -339,6 +398,14 @@ namespace HorariosConsoleApp.Migrations
                     b.HasOne("HorariosConsoleApp.Entities.Equipo", "Equipo")
                         .WithMany()
                         .HasForeignKey("EquipoId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("HorariosConsoleApp.Entities.Equipo", b =>
+                {
+                    b.HasOne("HorariosConsoleApp.Entities.Horario", "Horario")
+                        .WithMany()
+                        .HasForeignKey("HorarioId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

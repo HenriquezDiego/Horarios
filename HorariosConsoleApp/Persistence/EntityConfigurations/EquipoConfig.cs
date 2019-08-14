@@ -15,17 +15,17 @@ namespace HorariosConsoleApp.Persistence.EntityConfigurations
                 new Equipo()
                 {
                     EquipoId = 1,
-                    Nombre = "Zebra",
-                },
-                new Equipo()
-                {
-                    EquipoId = 2,
                     Nombre = "Bravo",
                 },
                 new Equipo()
                 {
+                    EquipoId = 2,
+                    Nombre = "Cobra",
+                },
+                new Equipo()
+                {
                     EquipoId = 3,
-                    Nombre = "Ranger",
+                    Nombre = "Zebra",
                 }
 
             });

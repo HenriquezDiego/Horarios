@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HorariosConsoleApp.Persistence.EntityConfigurations
 {
-    public class TipoHoraConfiguration : IEntityTypeConfiguration<TipoHora>
+    public class TipoHoraConfig : IEntityTypeConfiguration<TipoHora>
     {
         public void Configure(EntityTypeBuilder<TipoHora> builder)
         {
