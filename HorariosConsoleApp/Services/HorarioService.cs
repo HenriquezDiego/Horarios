@@ -31,7 +31,13 @@ namespace HorariosConsoleApp.Services
                     Abreviatura = "I",
                     Alias = "Azul"
                 },
-
+                new Horario()
+                {
+                    Descripcion = "Lunes a viernes de 2:00 am a 10:00 pm" +
+                                  "Sabado de 10:00 am a 2:00 am y Domingo 6:00 pm 6:00 am",
+                    Abreviatura = "II",
+                    Alias = "Azul"
+                }
             };
 
             _dbContext.Horarios.AddRange(listaHorarios);
