@@ -15,17 +15,21 @@ namespace HorariosConsoleApp
             services.AddTransient<IEmpleadoService, EmpleadoService>();
             services.AddTransient<IHorarioService, HorarioService>();
             services.AddTransient<ISeedService, SeedService>();
+            services.AddSingleton<IPagoEmpleadoService, PagoEmpleadoService>();
+
 
             var serviceProvider = services.BuildServiceProvider();
             var seedService = serviceProvider.GetService<ISeedService>();
+            //var calcularPago = serviceProvider.GetService<IPagoEmpleadoService>();
+
             try
             {
                 using (var appDbContext = new AppDbContext())
                 {
                     Console.WriteLine("Horarios Console App");
 
-                    Console.WriteLine(@"Antes de continuar verifique no tenga ninguna versión de la base de datos creada. Desea continuar (y/n)?");
-
+                    Console.WriteLine(@"Antes de continuar verifique no tenga ninguna versión de la base de datos creada. Desea continua r (y/n)?");
+                   
                     if (Console.ReadKey().Key == ConsoleKey.Y)
                     {
                         Console.WriteLine("");
@@ -37,6 +41,8 @@ namespace HorariosConsoleApp
                         Console.WriteLine("¡Base de datos Generada!");
                         Console.ReadLine();
                     }
+
+
                 }
             }
             catch (Exception e)

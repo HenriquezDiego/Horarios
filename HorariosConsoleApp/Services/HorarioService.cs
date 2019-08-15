@@ -215,7 +215,7 @@ namespace HorariosConsoleApp.Services
                 var hora = fragmento.HoraInicio.Hours;
                 var horaFin = fragmento.HoraFin.Hours;
 
-                while (hora <= horaFin)
+                while (hora < horaFin)
                 {
                     var detalleHora = new HoraDetalle()
                     {
