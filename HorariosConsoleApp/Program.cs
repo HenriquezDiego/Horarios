@@ -28,7 +28,7 @@ namespace HorariosConsoleApp
                 {
                     Console.WriteLine("Horarios Console App");
 
-                    Console.WriteLine(@"Antes de continuar verifique no tenga ninguna versión de la base de datos creada. Desea continua r (y/n)?");
+                    Console.WriteLine(@"Antes de continuar verifique no tenga ninguna versión de la base de datos creada. Desea continuar (y/n)?");
                    
                     if (Console.ReadKey().Key == ConsoleKey.Y)
                     {
