@@ -25,6 +25,7 @@ namespace HorariosConsoleApp.Entities
         public double TotalHorasExtraDiurnas { get; set; }
         public double HorasExtraNocturnas { get; set; }
         public double TotalHorasExtraNocturnas { get; set; }
+        public double HorasOrinariasDiurnasDomingo { get; set; }
         public double TotalHorasOrinariasDiurnasDomingo { get; set; }
         public double HorasOrdinarioasNocturnasDomingo { get; set; }
         public double TotalHorasOrdinariasNocturnasDomingo { get; set; }
