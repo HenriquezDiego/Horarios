@@ -8,50 +8,203 @@ using HorariosConsoleApp.Helpers;
 
 namespace HorariosConsoleApp.Services
 {
-    public class HorarioService
+    public class HorarioService: IHorarioService
     {
         private readonly AppDbContext _dbContext;
-        private readonly List<string> _messages;
 
         public HorarioService(AppDbContext dbContext)
         {
             _dbContext = dbContext;
-            _messages = new List<string>();
         }
-        private void GenerateHorarioFraccion()
-        {
-            var horarioDetalleServices = new HorarioDetalleServices(_dbContext);
-            horarioDetalleServices.HorarioFraccionA();
-            horarioDetalleServices.HorarioFraccionB();
-            horarioDetalleServices.HorarioFraccionC();
         
-        }
-
-        private bool Clean()
+        private bool HorarioFragmentoA()
         {
-            var horarioFraccion = _dbContext.HorarioFraccion.ToList();
-            var detallehoras = _dbContext.HoraDetalles.ToList();
-            if (detallehoras.Count > 0 && horarioFraccion.Count > 0)
+            var semanaDias = _dbContext.Dias.ToList();
+
+            List<HorarioFraccion> horarioFraccionList = new List<HorarioFraccion>();
+            foreach (var dia in semanaDias)
             {
-                _dbContext.HoraDetalles.RemoveRange(detallehoras);
-                _dbContext.HorarioFraccion.RemoveRange(horarioFraccion);
+                
+                if (dia.Abreviatura.Equals("S"))
+                {
+                    horarioFraccionList.AddRange(
+                        new List<HorarioFraccion>()
+                        {
+                            new HorarioFraccion()
+                            {
+                                DiaId = dia.DiaId,
+                                HoraInicio = new TimeSpan(6,0,0),
+                                HoraFin = new TimeSpan(10,0,0),
+                            },
+                            new HorarioFraccion()
+                            {
+                                DiaId = dia.DiaId,
+                                HoraInicio = new TimeSpan(18,0,0),
+                                HoraFin = new TimeSpan(23,59,59),
+                            }
+                        }
+                    );
+                }
+                else if(dia.Abreviatura.Equals("D"))
+                {
+
+                    horarioFraccionList.Add(
+                        
+                            new HorarioFraccion()
+                            {
+                                DiaId = dia.DiaId,
+                                HoraInicio = new TimeSpan(0,0,0),
+                                HoraFin = new TimeSpan(6,0,0),
+                            }  
+                        
+                    );
+
+                }
+                else
+                {
+                    var horarioFraccion = new HorarioFraccion()
+                    {
+                        DiaId = dia.DiaId,
+                        HoraInicio = new TimeSpan(6,0,0),
+                        HoraFin = new TimeSpan(14,0,0),
+                    };
+                
+                    horarioFraccionList.Add(horarioFraccion);
+                }
+               
 
             }
+            
+            var horario = _dbContext.Horarios.FirstOrDefault(hr=>hr.Abreviatura.Equals("I"));
+            horario.HorarioFraccion = horarioFraccionList;
+            return _dbContext.SaveChanges() > 0;
 
-            if (_dbContext.SaveChanges() <= 0)
+        }
+        private bool HorarioFragmentoB()
+        {
+            var semanaDias = _dbContext.Dias.ToList();
+
+            List<HorarioFraccion> horarioFraccionList = new List<HorarioFraccion>();
+            foreach (var dia in semanaDias)
             {
-                return false;
-            }
+                
+                if (dia.Abreviatura.Equals("S"))
+                {
+                    horarioFraccionList.AddRange(
+                        new List<HorarioFraccion>()
+                        {
+                            new HorarioFraccion()
+                            {
+                                DiaId = dia.DiaId,
+                                HoraInicio = new TimeSpan(10,0,0),
+                                HoraFin = new TimeSpan(14,0,0),
+                            }
+                        }
+                    );
+                }
+                else if(dia.Abreviatura.Equals("D"))
+                {
 
-            return true;
+                    horarioFraccionList.Add(
+                        
+                            new HorarioFraccion()
+                            {
+                                DiaId = dia.DiaId,
+                                HoraInicio = new TimeSpan(6,0,0),
+                                HoraFin = new TimeSpan(18,0,0),
+                            }  
+                        
+                    );
+
+                }
+                else
+                {
+                    var horarioFraccion = new HorarioFraccion()
+                    {
+                        DiaId = dia.DiaId,
+                        HoraInicio = new TimeSpan(14,0,0),
+                        HoraFin = new TimeSpan(22,0,0),
+                    };
+                
+                    horarioFraccionList.Add(horarioFraccion);
+                }
+               
+
+            }
+            
+            var horario = _dbContext.Horarios.FirstOrDefault(hr=>hr.Abreviatura.Equals("II"));
+            horario.HorarioFraccion = horarioFraccionList;
+            return _dbContext.SaveChanges() > 0;
+        }
+        private bool HorarioFragmentoC()
+        {
+            var semanaDias = _dbContext.Dias.ToList();
+
+            List<HorarioFraccion> horarioFraccionList = new List<HorarioFraccion>();
+            foreach (var dia in semanaDias)
+            {
+                
+                if (dia.Abreviatura.Equals("S"))
+                {
+                    horarioFraccionList.AddRange(
+                        new List<HorarioFraccion>()
+                        {
+                            new HorarioFraccion()
+                            {
+                                DiaId = dia.DiaId,
+                                HoraInicio = new TimeSpan(14,0,0),
+                                HoraFin = new TimeSpan(18,0,0),
+                            }
+                        }
+                    );
+                }
+                else if(dia.Abreviatura.Equals("D"))
+                {
+
+                    horarioFraccionList.Add(
+                        
+                            new HorarioFraccion()
+                            {
+                                DiaId = dia.DiaId,
+                                HoraInicio = new TimeSpan(18,0,0),
+                                HoraFin = new TimeSpan(23,59,59),
+                            }  
+                        
+                    );
+
+                }
+                else
+                {
+                    horarioFraccionList.Add(new HorarioFraccion() 
+                        {
+                            DiaId = dia.DiaId,
+                            HoraInicio = new TimeSpan(0,0,0),
+                            HoraFin = new TimeSpan(6,0,0)
+                        }
+                    );
+
+                    horarioFraccionList.Add( new HorarioFraccion()
+                        {
+                             DiaId = dia.DiaId,
+                            HoraInicio = new TimeSpan(10,0,0),
+                            HoraFin = new TimeSpan(18,0,0)
+                        }
+                    );
+                }
+
+            }
+            
+            var horario = _dbContext.Horarios.FirstOrDefault(hr=>hr.Abreviatura.Equals("III"));
+            horario.HorarioFraccion = horarioFraccionList;
+            return _dbContext.SaveChanges() > 0;
         }
 
-        public bool GenerarHoraDetalle(string abreviatura)
+        private bool GenerarHoraDetalle(string horarioAbreviatura)
         {
             var horario = _dbContext.Horarios
                                             .Include(hr=> hr.HorarioFraccion)
                                             .ThenInclude(frag=> frag.Dia)
-                                            .FirstOrDefault(hr => hr.Abreviatura.Equals(abreviatura));
+                                            .FirstOrDefault(hr => hr.Abreviatura.Equals(horarioAbreviatura));
 
             var fragmentosHorario = horario.HorarioFraccion;
             
@@ -75,34 +228,21 @@ namespace HorariosConsoleApp.Services
                 }
 
                 _dbContext.HoraDetalles.AddRange(listHoras);
-                if (_dbContext.SaveChanges() < 0)
-                {
-                    return false;
-                }
             }
-            return true;
+
+            return _dbContext.SaveChanges() > 0;
         }
 
-        public IEnumerable<string> Generate()
+        public IEnumerable<string> Seed()
         {
-
-            if (Clean())
-            {
-                _messages.Add("Base de datos preparada");
-            }
-            var empleadoServices = new EmpleadoServices(_dbContext);
-            empleadoServices.Seed();
-
-            GenerateHorarioFraccion();
-            if (GenerarHoraDetalle("I")
+            var mensajes = new List<string>();
+            if(HorarioFragmentoA()) mensajes.Add("Fragmento A done");
+            if(HorarioFragmentoB()) mensajes.Add("Fragmento B done");
+            if(HorarioFragmentoC()) mensajes.Add("Fragmento C done");
+            if(GenerarHoraDetalle("I") 
             &&GenerarHoraDetalle("II")
-            &&GenerarHoraDetalle("III")
-            )
-            {
-                _messages.Add("Horas detalle ingresadas");
-            }
-
-            return _messages;
+            &&GenerarHoraDetalle("III")) mensajes.Add("HorasDetalle done");
+            return mensajes;
 
         }
     }
