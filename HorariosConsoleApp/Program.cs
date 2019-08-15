@@ -18,30 +18,32 @@ namespace HorariosConsoleApp
 
             var serviceProvider = services.BuildServiceProvider();
             var seedService = serviceProvider.GetService<ISeedService>();
-            using (var appDbContext = new AppDbContext())
+            try
             {
-                Console.WriteLine("Horarios Console App");
-
-                Console.WriteLine(@"Antes de continuar verifique no tenga ninguna versión de la base de datos creada. Desea continuar (y/n)?");
-
-                if (Console.ReadKey().Key == ConsoleKey.Y)
+                using (var appDbContext = new AppDbContext())
                 {
-                    Console.WriteLine("");
-                    appDbContext.Database.Migrate();
-                    foreach (var msj in seedService.Generar())
+                    Console.WriteLine("Horarios Console App");
+
+                    Console.WriteLine(@"Antes de continuar verifique no tenga ninguna versión de la base de datos creada. Desea continuar (y/n)?");
+
+                    if (Console.ReadKey().Key == ConsoleKey.Y)
                     {
-                        Console.WriteLine(msj);
+                        Console.WriteLine("");
+                        appDbContext.Database.Migrate();
+                        foreach (var msj in seedService.Generar())
+                        {
+                            Console.WriteLine(msj);
+                        }
+                        Console.WriteLine("¡Base de datos Generada!");
+                        Console.ReadLine();
                     }
                 }
-                else
-                {
-                    return;
-                }
             }
-            
-            Console.WriteLine("¡Base de datos Generada!");
-            Console.ReadLine();
-            
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadLine();
+            }
             
         }
     }
