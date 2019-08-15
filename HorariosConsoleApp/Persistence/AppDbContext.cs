@@ -15,12 +15,13 @@ namespace HorariosConsoleApp.Persistence
         public DbSet<Dia> Dias { get; set; }
         public DbSet<Horario> Horarios { get; set; }
         public DbSet<CambioHorario> CambioHorarios { get; set; }
+        public DbSet<PagoEmpleado> PagoEmpleados { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "server=localhost;Database=HorarioDbV1.1.8;Integrated Security=true;MultipleActiveResultSets=true;");
+                "server=localhost;Database=HorarioDbV1.1.9;Integrated Security=true;MultipleActiveResultSets=true;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
