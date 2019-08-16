@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HorariosConsoleApp.Migrations
 {
-    public partial class version120 : Migration
+    public partial class Version120 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -157,21 +157,6 @@ namespace HorariosConsoleApp.Migrations
                     EmpleadoId = table.Column<int>(nullable: true),
                     EquipoId = table.Column<int>(nullable: true),
                     HorarioId = table.Column<int>(nullable: true),
-                    HorasOrdinariasDiurnas = table.Column<double>(nullable: false),
-                    TotalHorasOrdinariasDiurnas = table.Column<double>(nullable: false),
-                    HorasOrdinariasNocturnas = table.Column<double>(nullable: false),
-                    TotalHorasOrdinariasNocturnas = table.Column<double>(nullable: false),
-                    HorasExtraDiurnas = table.Column<double>(nullable: false),
-                    TotalHorasExtraDiurnas = table.Column<double>(nullable: false),
-                    HorasExtraNocturnas = table.Column<double>(nullable: false),
-                    TotalHorasExtraNocturnas = table.Column<double>(nullable: false),
-                    TotalHorasOrinariasDiurnasDomingo = table.Column<double>(nullable: false),
-                    HorasOrdinarioasNocturnasDomingo = table.Column<double>(nullable: false),
-                    TotalHorasOrdinariasNocturnasDomingo = table.Column<double>(nullable: false),
-                    HorasExtraDiurnasDomingo = table.Column<double>(nullable: false),
-                    TotalHorasExtraDiurnasDomingo = table.Column<double>(nullable: false),
-                    HorasExtraNocturnasDomingo = table.Column<double>(nullable: false),
-                    TotalHorasExtraNocturnasDomingo = table.Column<double>(nullable: false),
                     TotalAsueto = table.Column<double>(nullable: false),
                     FechaInicio = table.Column<DateTime>(nullable: false),
                     FechaFin = table.Column<DateTime>(nullable: false)
@@ -206,9 +191,9 @@ namespace HorariosConsoleApp.Migrations
                     PagoEmpleadoId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     EmpleadoId = table.Column<int>(nullable: true),
-                    EquipoId = table.Column<int>(nullable: true),
                     SalarioHora = table.Column<decimal>(nullable: false),
-                    HorarioId = table.Column<int>(nullable: true),
+                    Equipo = table.Column<string>(nullable: true),
+                    Horario = table.Column<string>(nullable: true),
                     Dia = table.Column<string>(nullable: true),
                     FechaPago = table.Column<DateTime>(nullable: false),
                     EsAsueto = table.Column<bool>(nullable: false),
@@ -222,18 +207,6 @@ namespace HorariosConsoleApp.Migrations
                         column: x => x.EmpleadoId,
                         principalTable: "Empleados",
                         principalColumn: "EmpleadoId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_PagoEmpleados_Equipos_EquipoId",
-                        column: x => x.EquipoId,
-                        principalTable: "Equipos",
-                        principalColumn: "EquipoId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_PagoEmpleados_Horarios_HorarioId",
-                        column: x => x.HorarioId,
-                        principalTable: "Horarios",
-                        principalColumn: "HorarioId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -354,16 +327,6 @@ namespace HorariosConsoleApp.Migrations
                 name: "IX_PagoEmpleados_EmpleadoId",
                 table: "PagoEmpleados",
                 column: "EmpleadoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PagoEmpleados_EquipoId",
-                table: "PagoEmpleados",
-                column: "EquipoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PagoEmpleados_HorarioId",
-                table: "PagoEmpleados",
-                column: "HorarioId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

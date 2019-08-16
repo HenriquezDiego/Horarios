@@ -35,37 +35,7 @@ namespace HorariosConsoleApp.Migrations
 
                     b.Property<int?>("HorarioId");
 
-                    b.Property<double>("HorasExtraDiurnas");
-
-                    b.Property<double>("HorasExtraDiurnasDomingo");
-
-                    b.Property<double>("HorasExtraNocturnas");
-
-                    b.Property<double>("HorasExtraNocturnasDomingo");
-
-                    b.Property<double>("HorasOrdinariasDiurnas");
-
-                    b.Property<double>("HorasOrdinariasNocturnas");
-
-                    b.Property<double>("HorasOrdinarioasNocturnasDomingo");
-
                     b.Property<double>("TotalAsueto");
-
-                    b.Property<double>("TotalHorasExtraDiurnas");
-
-                    b.Property<double>("TotalHorasExtraDiurnasDomingo");
-
-                    b.Property<double>("TotalHorasExtraNocturnas");
-
-                    b.Property<double>("TotalHorasExtraNocturnasDomingo");
-
-                    b.Property<double>("TotalHorasOrdinariasDiurnas");
-
-                    b.Property<double>("TotalHorasOrdinariasNocturnas");
-
-                    b.Property<double>("TotalHorasOrdinariasNocturnasDomingo");
-
-                    b.Property<double>("TotalHorasOrinariasDiurnasDomingo");
 
                     b.HasKey("CambioHorarioId");
 
@@ -290,13 +260,13 @@ namespace HorariosConsoleApp.Migrations
 
                     b.Property<int?>("EmpleadoId");
 
-                    b.Property<int?>("EquipoId");
+                    b.Property<string>("Equipo");
 
                     b.Property<bool>("EsAsueto");
 
                     b.Property<DateTime>("FechaPago");
 
-                    b.Property<int?>("HorarioId");
+                    b.Property<string>("Horario");
 
                     b.Property<decimal>("SalarioHora");
 
@@ -305,10 +275,6 @@ namespace HorariosConsoleApp.Migrations
                     b.HasKey("PagoEmpleadoId");
 
                     b.HasIndex("EmpleadoId");
-
-                    b.HasIndex("EquipoId");
-
-                    b.HasIndex("HorarioId");
 
                     b.ToTable("PagoEmpleados");
                 });
@@ -463,16 +429,6 @@ namespace HorariosConsoleApp.Migrations
                     b.HasOne("HorariosConsoleApp.Entities.Empleado", "Empleado")
                         .WithMany()
                         .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("HorariosConsoleApp.Entities.Equipo", "Equipo")
-                        .WithMany()
-                        .HasForeignKey("EquipoId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("HorariosConsoleApp.Entities.Horario", "Horario")
-                        .WithMany()
-                        .HasForeignKey("HorarioId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
