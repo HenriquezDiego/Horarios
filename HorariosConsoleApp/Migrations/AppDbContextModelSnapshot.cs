@@ -78,6 +78,27 @@ namespace HorariosConsoleApp.Migrations
                     b.ToTable("CambioHorarios");
                 });
 
+            modelBuilder.Entity("HorariosConsoleApp.Entities.DetallePagoEmpleado", b =>
+                {
+                    b.Property<int>("DetallePagoEmpleadoId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("CantidadHoras");
+
+                    b.Property<int?>("PagoEmpleadoId");
+
+                    b.Property<double>("Porcentaje");
+
+                    b.Property<string>("TipoHora");
+
+                    b.HasKey("DetallePagoEmpleadoId");
+
+                    b.HasIndex("PagoEmpleadoId");
+
+                    b.ToTable("DetallePagoEmpleados");
+                });
+
             modelBuilder.Entity("HorariosConsoleApp.Entities.Dia", b =>
                 {
                     b.Property<int>("DiaId")
@@ -265,7 +286,7 @@ namespace HorariosConsoleApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DiaId");
+                    b.Property<string>("Dia");
 
                     b.Property<int?>("EmpleadoId");
 
@@ -277,45 +298,11 @@ namespace HorariosConsoleApp.Migrations
 
                     b.Property<int?>("HorarioId");
 
-                    b.Property<double>("HorasExtraDiurnas");
-
-                    b.Property<double>("HorasExtraDiurnasDomingo");
-
-                    b.Property<double>("HorasExtraNocturnas");
-
-                    b.Property<double>("HorasExtraNocturnasDomingo");
-
-                    b.Property<double>("HorasOrdinariasDiurnas");
-
-                    b.Property<double>("HorasOrdinariasNocturnas");
-
-                    b.Property<double>("HorasOrdinarioasNocturnasDomingo");
-
-                    b.Property<double>("HorasOrinariasDiurnasDomingo");
-
                     b.Property<decimal>("SalarioHora");
 
                     b.Property<double>("TotalAsueto");
 
-                    b.Property<double>("TotalHorasExtraDiurnas");
-
-                    b.Property<double>("TotalHorasExtraDiurnasDomingo");
-
-                    b.Property<double>("TotalHorasExtraNocturnas");
-
-                    b.Property<double>("TotalHorasExtraNocturnasDomingo");
-
-                    b.Property<double>("TotalHorasOrdinariasDiurnas");
-
-                    b.Property<double>("TotalHorasOrdinariasNocturnas");
-
-                    b.Property<double>("TotalHorasOrdinariasNocturnasDomingo");
-
-                    b.Property<double>("TotalHorasOrinariasDiurnasDomingo");
-
                     b.HasKey("PagoEmpleadoId");
-
-                    b.HasIndex("DiaId");
 
                     b.HasIndex("EmpleadoId");
 
@@ -421,6 +408,14 @@ namespace HorariosConsoleApp.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("HorariosConsoleApp.Entities.DetallePagoEmpleado", b =>
+                {
+                    b.HasOne("HorariosConsoleApp.Entities.PagoEmpleado")
+                        .WithMany("DetallePago")
+                        .HasForeignKey("PagoEmpleadoId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("HorariosConsoleApp.Entities.Empleado", b =>
                 {
                     b.HasOne("HorariosConsoleApp.Entities.Equipo", "Equipo")
@@ -465,11 +460,6 @@ namespace HorariosConsoleApp.Migrations
 
             modelBuilder.Entity("HorariosConsoleApp.Entities.PagoEmpleado", b =>
                 {
-                    b.HasOne("HorariosConsoleApp.Entities.Dia", "Dia")
-                        .WithMany()
-                        .HasForeignKey("DiaId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("HorariosConsoleApp.Entities.Empleado", "Empleado")
                         .WithMany()
                         .HasForeignKey("EmpleadoId")
