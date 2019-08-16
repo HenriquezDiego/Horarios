@@ -10,7 +10,7 @@ namespace HorariosConsoleApp.Persistence
         public DbSet<Empleado> Empleados { get; set; }
         public DbSet<Equipo> Equipos { get; set; }
         public DbSet<HoraDetalle> HoraDetalles { get; set; }
-        public DbSet<HorarioFraccion> HorarioFraccion { get; set; }
+        public DbSet<HorarioFragmento> HorarioFragmento { get; set; }
         public DbSet<TipoHora> TipoHoras { get; set; }
         public DbSet<Dia> Dias { get; set; }
         public DbSet<Horario> Horarios { get; set; }

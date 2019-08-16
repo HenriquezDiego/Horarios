@@ -2,9 +2,9 @@
 
 namespace HorariosConsoleApp.Entities
 {
-    public class HorarioFraccion
+    public class HorarioFragmento
     {
-        public int HorarioFraccionId { get; set; }
+        public int HorarioFragmentoId { get; set; }
         public int DiaId { get; set; }
         public Dia Dia { get; set; }
         public TimeSpan HoraInicio { get; set; }

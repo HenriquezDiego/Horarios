@@ -21,22 +21,22 @@ namespace HorariosConsoleApp.Services
         {
             var semanaDias = _dbContext.Dias.ToList();
 
-            List<HorarioFraccion> horarioFraccionList = new List<HorarioFraccion>();
+            List<HorarioFragmento> horarioFraccionList = new List<HorarioFragmento>();
             foreach (var dia in semanaDias)
             {
                 
                 if (dia.Abreviatura.Equals("S"))
                 {
                     horarioFraccionList.AddRange(
-                        new List<HorarioFraccion>()
+                        new List<HorarioFragmento>()
                         {
-                            new HorarioFraccion()
+                            new HorarioFragmento()
                             {
                                 DiaId = dia.DiaId,
                                 HoraInicio = new TimeSpan(6,0,0),
                                 HoraFin = new TimeSpan(10,0,0),
                             },
-                            new HorarioFraccion()
+                            new HorarioFragmento()
                             {
                                 DiaId = dia.DiaId,
                                 HoraInicio = new TimeSpan(18,0,0),
@@ -50,7 +50,7 @@ namespace HorariosConsoleApp.Services
 
                     horarioFraccionList.Add(
                         
-                            new HorarioFraccion()
+                            new HorarioFragmento()
                             {
                                 DiaId = dia.DiaId,
                                 HoraInicio = new TimeSpan(0,0,0),
@@ -62,7 +62,7 @@ namespace HorariosConsoleApp.Services
                 }
                 else
                 {
-                    var horarioFraccion = new HorarioFraccion()
+                    var horarioFraccion = new HorarioFragmento()
                     {
                         DiaId = dia.DiaId,
                         HoraInicio = new TimeSpan(6,0,0),
@@ -84,16 +84,16 @@ namespace HorariosConsoleApp.Services
         {
             var semanaDias = _dbContext.Dias.ToList();
 
-            List<HorarioFraccion> horarioFraccionList = new List<HorarioFraccion>();
+            List<HorarioFragmento> horarioFraccionList = new List<HorarioFragmento>();
             foreach (var dia in semanaDias)
             {
                 
                 if (dia.Abreviatura.Equals("S"))
                 {
                     horarioFraccionList.AddRange(
-                        new List<HorarioFraccion>()
+                        new List<HorarioFragmento>()
                         {
-                            new HorarioFraccion()
+                            new HorarioFragmento()
                             {
                                 DiaId = dia.DiaId,
                                 HoraInicio = new TimeSpan(10,0,0),
@@ -107,7 +107,7 @@ namespace HorariosConsoleApp.Services
 
                     horarioFraccionList.Add(
                         
-                            new HorarioFraccion()
+                            new HorarioFragmento()
                             {
                                 DiaId = dia.DiaId,
                                 HoraInicio = new TimeSpan(6,0,0),
@@ -119,7 +119,7 @@ namespace HorariosConsoleApp.Services
                 }
                 else
                 {
-                    var horarioFraccion = new HorarioFraccion()
+                    var horarioFraccion = new HorarioFragmento()
                     {
                         DiaId = dia.DiaId,
                         HoraInicio = new TimeSpan(14,0,0),
@@ -140,16 +140,16 @@ namespace HorariosConsoleApp.Services
         {
             var semanaDias = _dbContext.Dias.ToList();
 
-            List<HorarioFraccion> horarioFraccionList = new List<HorarioFraccion>();
+            List<HorarioFragmento> horarioFraccionList = new List<HorarioFragmento>();
             foreach (var dia in semanaDias)
             {
                 
                 if (dia.Abreviatura.Equals("S"))
                 {
                     horarioFraccionList.AddRange(
-                        new List<HorarioFraccion>()
+                        new List<HorarioFragmento>()
                         {
-                            new HorarioFraccion()
+                            new HorarioFragmento()
                             {
                                 DiaId = dia.DiaId,
                                 HoraInicio = new TimeSpan(14,0,0),
@@ -163,7 +163,7 @@ namespace HorariosConsoleApp.Services
 
                     horarioFraccionList.Add(
                         
-                            new HorarioFraccion()
+                            new HorarioFragmento()
                             {
                                 DiaId = dia.DiaId,
                                 HoraInicio = new TimeSpan(18,0,0),
@@ -175,7 +175,7 @@ namespace HorariosConsoleApp.Services
                 }
                 else
                 {
-                    horarioFraccionList.Add(new HorarioFraccion() 
+                    horarioFraccionList.Add(new HorarioFragmento() 
                         {
                             DiaId = dia.DiaId,
                             HoraInicio = new TimeSpan(0,0,0),
@@ -183,7 +183,7 @@ namespace HorariosConsoleApp.Services
                         }
                     );
 
-                    horarioFraccionList.Add( new HorarioFraccion()
+                    horarioFraccionList.Add( new HorarioFragmento()
                         {
                              DiaId = dia.DiaId,
                             HoraInicio = new TimeSpan(10,0,0),
@@ -220,7 +220,7 @@ namespace HorariosConsoleApp.Services
                     var detalleHora = new HoraDetalle()
                     {
                         Hora = new TimeSpan(hora,0,0),
-                        HorarioFraccionId = fragmento.HorarioFraccionId,
+                        HorarioFraccionId = fragmento.HorarioFragmentoId,
                         TipoHoraId = Workday.CheckHour(hora,dia)
                     };
                     listHoras.Add(detalleHora);
