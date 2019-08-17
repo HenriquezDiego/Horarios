@@ -76,7 +76,7 @@ namespace HorariosConsoleApp.Services
             }
             
             var horario = _dbContext.Horarios.FirstOrDefault(hr=>hr.Abreviatura.Equals("I"));
-            horario.HorarioFraccion = horarioFraccionList;
+            horario.HorarioFragmentos = horarioFraccionList;
             return _dbContext.SaveChanges() > 0;
 
         }
@@ -133,7 +133,7 @@ namespace HorariosConsoleApp.Services
             }
             
             var horario = _dbContext.Horarios.FirstOrDefault(hr=>hr.Abreviatura.Equals("II"));
-            horario.HorarioFraccion = horarioFraccionList;
+            horario.HorarioFragmentos = horarioFraccionList;
             return _dbContext.SaveChanges() > 0;
         }
         private bool HorarioFragmentoC()
@@ -195,18 +195,18 @@ namespace HorariosConsoleApp.Services
             }
             
             var horario = _dbContext.Horarios.FirstOrDefault(hr=>hr.Abreviatura.Equals("III"));
-            horario.HorarioFraccion = horarioFraccionList;
+            horario.HorarioFragmentos = horarioFraccionList;
             return _dbContext.SaveChanges() > 0;
         }
 
         private bool GenerarHoraDetalle(string horarioAbreviatura)
         {
             var horario = _dbContext.Horarios
-                                            .Include(hr=> hr.HorarioFraccion)
+                                            .Include(hr=> hr.HorarioFragmentos)
                                             .ThenInclude(frag=> frag.Dia)
                                             .FirstOrDefault(hr => hr.Abreviatura.Equals(horarioAbreviatura));
 
-            var fragmentosHorario = horario.HorarioFraccion;
+            var fragmentosHorario = horario.HorarioFragmentos;
             
             foreach (var fragmento in fragmentosHorario)
             {

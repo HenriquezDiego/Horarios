@@ -22,7 +22,7 @@ namespace HorariosConsoleApp.Persistence
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "server=localhost;Database=HorarioDbV1.2.0;Integrated Security=true;MultipleActiveResultSets=true;");
+                "server=localhost;Database=HorarioDbV1.2.1;Integrated Security=true;MultipleActiveResultSets=true;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
