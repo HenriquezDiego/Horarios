@@ -2,35 +2,36 @@
 {
     public static class Workday
     {
+        public const int HoraNocturna = 19;
         public static int CheckHour(int hour, string day)
         {
             
-            if (hour > 5 && hour < 22 && day.Equals("S"))
+            if (hour > 5 && hour < HoraNocturna && day.Equals("S"))
             {
                 return (int) HoraTipo.Hds;
             }
 
-            if (hour == 22 || hour == 23 || (hour >= 0 && hour < 6) && day.Equals("S"))
+            if (hour == HoraNocturna || hour == 23 || (hour >= 0 && hour < 6) && day.Equals("S"))
             {
                 return (int)HoraTipo.Hns;
             }
 
-            if (hour > 5 && hour < 22 && day.Equals("D"))
+            if (hour > 5 && hour < HoraNocturna && day.Equals("D"))
             {
                 return (int) HoraTipo.Hdd;
             }
 
-            if (hour == 22 || hour == 23 || (hour >= 0 && hour < 6) && day.Equals("D"))
+            if (hour == HoraNocturna || hour == 23 || (hour >= 0 && hour < 6) && day.Equals("D"))
             {
                 return (int)HoraTipo.Hnd;
             }
 
-            if (hour > 5 && hour < 22 && !day.Equals("S") && !day.Equals("D"))
+            if (hour > 5 && hour < HoraNocturna && !day.Equals("S") && !day.Equals("D"))
             {
                 return (int)HoraTipo.Hod;
             }
 
-            if (hour == 22 || hour == 23 || (hour >= 0 && hour < 6) && !day.Equals("S") && !day.Equals("D"))
+            if (hour == HoraNocturna || hour == 23 || (hour >= 0 && hour < 6) && !day.Equals("S") && !day.Equals("D"))
             {
                 return (int)HoraTipo.Hon;
             }
