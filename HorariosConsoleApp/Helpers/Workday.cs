@@ -11,7 +11,7 @@
                 return (int) HoraTipo.Hds;
             }
 
-            if (hour == HoraNocturna || hour == 23 || (hour >= 0 && hour < 6) && day.Equals("S"))
+            if (hour >= HoraNocturna || (hour >= 0 && hour < 6) && day.Equals("S"))
             {
                 return (int)HoraTipo.Hns;
             }
@@ -21,7 +21,7 @@
                 return (int) HoraTipo.Hdd;
             }
 
-            if (hour == HoraNocturna || hour == 23 || (hour >= 0 && hour < 6) && day.Equals("D"))
+            if (hour >= HoraNocturna || (hour >= 0 && hour < 6) && day.Equals("D"))
             {
                 return (int)HoraTipo.Hnd;
             }
@@ -31,7 +31,7 @@
                 return (int)HoraTipo.Hod;
             }
 
-            if (hour == HoraNocturna || hour == 23 || (hour >= 0 && hour < 6) && !day.Equals("S") && !day.Equals("D"))
+            if (hour >= HoraNocturna || (hour >= 0 && hour < 5) && !day.Equals("S") && !day.Equals("D"))
             {
                 return (int)HoraTipo.Hon;
             }

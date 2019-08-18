@@ -172,9 +172,7 @@ namespace HorariosConsoleApp.Migrations
 
                     b.Property<TimeSpan>("Hora");
 
-                    b.Property<int>("HorarioFraccionId");
-
-                    b.Property<int?>("HorarioFragmentoId");
+                    b.Property<int>("HorarioFragmentoId");
 
                     b.Property<int>("TipoHoraId");
 
@@ -247,7 +245,7 @@ namespace HorariosConsoleApp.Migrations
 
                     b.HasIndex("HorarioId");
 
-                    b.ToTable("HorarioFragmento");
+                    b.ToTable("HorariosFragmentos");
                 });
 
             modelBuilder.Entity("HorariosConsoleApp.Entities.PagoEmpleado", b =>

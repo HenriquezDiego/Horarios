@@ -23,12 +23,12 @@ namespace HorariosConsoleApp.Services
         }
         private bool Clean()
         {
-            var horarioFragmentos = _dbContext.HorarioFragmento.ToList();
+            var horarioFragmentos = _dbContext.HorariosFragmentos.ToList();
             var detallehoras = _dbContext.HoraDetalles.ToList();
             if (detallehoras.Count > 0 && horarioFragmentos.Count > 0)
             {
                 _dbContext.HoraDetalles.RemoveRange(detallehoras);
-                _dbContext.HorarioFragmento.RemoveRange(horarioFragmentos);
+                _dbContext.HorariosFragmentos.RemoveRange(horarioFragmentos);
 
             }
 

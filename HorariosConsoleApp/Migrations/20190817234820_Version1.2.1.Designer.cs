@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HorariosConsoleApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190817161041_Version1.2.1")]
+    [Migration("20190817234820_Version1.2.1")]
     partial class Version121
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -174,9 +174,7 @@ namespace HorariosConsoleApp.Migrations
 
                     b.Property<TimeSpan>("Hora");
 
-                    b.Property<int>("HorarioFraccionId");
-
-                    b.Property<int?>("HorarioFragmentoId");
+                    b.Property<int>("HorarioFragmentoId");
 
                     b.Property<int>("TipoHoraId");
 
@@ -249,7 +247,7 @@ namespace HorariosConsoleApp.Migrations
 
                     b.HasIndex("HorarioId");
 
-                    b.ToTable("HorarioFragmento");
+                    b.ToTable("HorariosFragmentos");
                 });
 
             modelBuilder.Entity("HorariosConsoleApp.Entities.PagoEmpleado", b =>

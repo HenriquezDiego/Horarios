@@ -72,7 +72,7 @@ namespace HorariosConsoleApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "HorarioFragmento",
+                name: "HorariosFragmentos",
                 columns: table => new
                 {
                     HorarioFragmentoId = table.Column<int>(nullable: false)
@@ -84,15 +84,15 @@ namespace HorariosConsoleApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HorarioFragmento", x => x.HorarioFragmentoId);
+                    table.PrimaryKey("PK_HorariosFragmentos", x => x.HorarioFragmentoId);
                     table.ForeignKey(
-                        name: "FK_HorarioFragmento_Dias_DiaId",
+                        name: "FK_HorariosFragmentos_Dias_DiaId",
                         column: x => x.DiaId,
                         principalTable: "Dias",
                         principalColumn: "DiaId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_HorarioFragmento_Horarios_HorarioId",
+                        name: "FK_HorariosFragmentos_Horarios_HorarioId",
                         column: x => x.HorarioId,
                         principalTable: "Horarios",
                         principalColumn: "HorarioId",
@@ -128,8 +128,7 @@ namespace HorariosConsoleApp.Migrations
                 {
                     HoraDetalleId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    HorarioFraccionId = table.Column<int>(nullable: false),
-                    HorarioFragmentoId = table.Column<int>(nullable: true),
+                    HorarioFragmentoId = table.Column<int>(nullable: false),
                     Hora = table.Column<TimeSpan>(nullable: false),
                     TipoHoraId = table.Column<int>(nullable: false)
                 },
@@ -137,9 +136,9 @@ namespace HorariosConsoleApp.Migrations
                 {
                     table.PrimaryKey("PK_HoraDetalles", x => x.HoraDetalleId);
                     table.ForeignKey(
-                        name: "FK_HoraDetalles_HorarioFragmento_HorarioFragmentoId",
+                        name: "FK_HoraDetalles_HorariosFragmentos_HorarioFragmentoId",
                         column: x => x.HorarioFragmentoId,
-                        principalTable: "HorarioFragmento",
+                        principalTable: "HorariosFragmentos",
                         principalColumn: "HorarioFragmentoId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -294,13 +293,13 @@ namespace HorariosConsoleApp.Migrations
                 column: "TipoHoraId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HorarioFragmento_DiaId",
-                table: "HorarioFragmento",
+                name: "IX_HorariosFragmentos_DiaId",
+                table: "HorariosFragmentos",
                 column: "DiaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HorarioFragmento_HorarioId",
-                table: "HorarioFragmento",
+                name: "IX_HorariosFragmentos_HorarioId",
+                table: "HorariosFragmentos",
                 column: "HorarioId");
 
             migrationBuilder.CreateIndex(
@@ -324,7 +323,7 @@ namespace HorariosConsoleApp.Migrations
                 name: "PagoEmpleados");
 
             migrationBuilder.DropTable(
-                name: "HorarioFragmento");
+                name: "HorariosFragmentos");
 
             migrationBuilder.DropTable(
                 name: "TipoHoras");

@@ -220,7 +220,7 @@ namespace HorariosConsoleApp.Services
                     var detalleHora = new HoraDetalle()
                     {
                         Hora = new TimeSpan(hora,0,0),
-                        HorarioFraccionId = fragmento.HorarioFragmentoId,
+                        HorarioFragmentoId = fragmento.HorarioFragmentoId,
                         TipoHoraId = Workday.CheckHour(hora,dia)
                     };
                     listHoras.Add(detalleHora);
