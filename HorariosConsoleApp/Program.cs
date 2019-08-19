@@ -20,7 +20,7 @@ namespace HorariosConsoleApp
 
             var serviceProvider = services.BuildServiceProvider();
             var seedService = serviceProvider.GetService<ISeedService>();
-            //var calcularPago = serviceProvider.GetService<IPagoEmpleadoService>();
+            var calcularPago = serviceProvider.GetService<IPagoEmpleadoService>();
 
             try
             {
@@ -38,12 +38,12 @@ namespace HorariosConsoleApp
                         {
                             Console.WriteLine(msj);
                         }
-
+                        calcularPago.Calcular(new DateTime(2019, 8, 1), new DateTime(2019, 8, 31));
                         Console.WriteLine("¡Base de datos Generada!");
                         Console.ReadLine();
                     }
 
-
+                   
                 }
             }
             catch (Exception e)

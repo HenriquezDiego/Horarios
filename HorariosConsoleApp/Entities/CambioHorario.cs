@@ -11,7 +11,7 @@ namespace HorariosConsoleApp.Entities
         public string Equipo { get; set; }
         public string Horario { get; set; }
         public double TotalAsueto { get; set; }
-        public DateTime? FechaInicio { get; set; }
+        public DateTime FechaInicio { get; set; }
         public DateTime? FechaFin { get; set; }
     }
 }
