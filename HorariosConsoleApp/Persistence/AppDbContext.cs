@@ -17,7 +17,7 @@ namespace HorariosConsoleApp.Persistence
         public DbSet<CambioHorario> CambioHorarios { get; set; }
         public DbSet<PagoEmpleado> PagoEmpleados { get; set; }
         public DbSet<DetallePagoEmpleado> DetallePagoEmpleados { get; set; }
-
+        public DbQuery<ConsultaDetalleHoras> ConsultaHoraDetalle { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,6 +34,9 @@ namespace HorariosConsoleApp.Persistence
             modelBuilder.ApplyConfiguration(new TipoHoraConfig())
                         .ApplyConfiguration(new HorarioConfig())
                         .ApplyConfiguration(new DiaConfiguration());
+
+            modelBuilder.Query<ConsultaDetalleHoras>().ToView("ConsultaHoraDetalle");
+            
         }
     }
 }
