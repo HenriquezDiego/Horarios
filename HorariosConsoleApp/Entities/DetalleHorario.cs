@@ -2,7 +2,7 @@
 {
     public class ConsultaDetalleHoras
     {
-        public decimal NumeroHoras { get; set; }
+        public int NumeroHoras { get; set; }
         public int TipoHoraId { get; set; }
         public string TipoHora { get; set; }
         public string Horario { get; set; }

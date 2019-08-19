@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using HorariosConsoleApp.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace HorariosConsoleApp.Services
 {
@@ -21,7 +22,7 @@ namespace HorariosConsoleApp.Services
             _horarioService = horarioService;
             _messages = new List<string>();
         }
-        private bool Clean()
+        private bool SetupDatabase()
         {
             var horarioFragmentos = _dbContext.HorariosFragmentos.ToList();
             var detallehoras = _dbContext.HoraDetalles.ToList();
@@ -32,18 +33,23 @@ namespace HorariosConsoleApp.Services
 
             }
 
-            if (_dbContext.SaveChanges() <= 0)
-            {
-                return false;
-            }
-
-            return true;
+            _dbContext.Database.ExecuteSqlCommand(@"CREATE OR ALTER VIEW [dbo].[ConsultaDetalleHoras] AS 
+            SELECT COUNT(*) AS NumeroHoras, th.TipoHoraId, th.Nombre AS TipoHora, h.Alias 
+            AS Horario,d.DiaId,d.Nombre
+            AS Dia FROM dbo.HoraDetalles AS hd INNER JOIN
+            dbo.TipoHoras AS th ON hd.TipoHoraId = th.TipoHoraId INNER JOIN
+            dbo.HorariosFragmentos AS hf ON hd.HorarioFragmentoId = hf.HorarioFragmentoId INNER JOIN
+            dbo.Horarios AS h ON hf.HorarioId = h.HorarioId INNER JOIN
+            dbo.Dias AS d ON hf.DiaId = d.DiaId
+            GROUP BY th.Nombre, hd.HorarioFragmentoId, h.Alias, d.Nombre, d.DiaId, th.TipoHoraId");
+            return _dbContext.SaveChanges() > 0;
         }
         public IEnumerable<string> Generar()
         {
-            if (Clean()) _messages.Add("Base de datos preparada");
+            if (SetupDatabase()) _messages.Add("Base de datos preparada");
             _empleadoService.Seed();
             _messages.AddRange(_horarioService.Seed());
+
 
             return _messages;
         }

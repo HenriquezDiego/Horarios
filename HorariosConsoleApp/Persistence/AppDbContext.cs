@@ -35,7 +35,7 @@ namespace HorariosConsoleApp.Persistence
                         .ApplyConfiguration(new HorarioConfig())
                         .ApplyConfiguration(new DiaConfiguration());
 
-            modelBuilder.Query<ConsultaDetalleHoras>().ToView("ConsultaHoraDetalle");
+            modelBuilder.Query<ConsultaDetalleHoras>().ToView("ConsultaDetalleHoras");
             
         }
     }

@@ -32,18 +32,5 @@ namespace HorariosConsoleApp.Services
             return listFechas;
         }
 
-        public void Query()
-        {
-            //var x = from horaDetalle in _dbContext.HoraDetalles
-            //        .Include(ht => ht.TipoHora)
-            //        .Include(ht => ht.HorarioFragmento)
-            //        .ThenInclude(ht => ht.Dia)
-            //        .Include(ht => ht.HorarioFragmento).ToList()
-            //    select new object()
-            //    {
-
-            //    };
-
-        }
     }
 }
