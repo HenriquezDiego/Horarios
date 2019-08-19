@@ -3,7 +3,6 @@ using HorariosConsoleApp.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Linq;
 
 namespace HorariosConsoleApp
 {
@@ -40,8 +39,6 @@ namespace HorariosConsoleApp
                             Console.WriteLine(msj);
                         }
 
-                        var x = appDbContext.ConsultaHoraDetalle.ToList();
-                        Console.WriteLine(x);
                         Console.WriteLine("¡Base de datos Generada!");
                         Console.ReadLine();
                     }
