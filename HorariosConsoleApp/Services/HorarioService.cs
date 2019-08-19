@@ -143,7 +143,7 @@ namespace HorariosConsoleApp.Services
             List<HorarioFragmento> horarioFraccionList = new List<HorarioFragmento>();
             foreach (var dia in semanaDias)
             {
-                
+
                 if (dia.Abreviatura.Equals("S"))
                 {
                     horarioFraccionList.AddRange(
@@ -158,40 +158,47 @@ namespace HorariosConsoleApp.Services
                         }
                     );
                 }
-                else if(dia.Abreviatura.Equals("D"))
+                else if (dia.Abreviatura.Equals("D"))
                 {
 
                     horarioFraccionList.Add(
-                        
+
                             new HorarioFragmento()
                             {
                                 DiaId = dia.DiaId,
-                                HoraInicio = new TimeSpan(18,0,0),
-                                HoraFin = new TimeSpan(23,59,59),
-                            }  
-                        
+                                HoraInicio = new TimeSpan(18, 0, 0),
+                                HoraFin = new TimeSpan(23, 59, 59),
+                            }
+
                     );
+
+                    horarioFraccionList.Add(new HorarioFragmento()
+                    {
+                        DiaId = 1,
+                        HoraInicio = new TimeSpan(0, 0, 0),
+                        HoraFin = new TimeSpan(6, 0, 0)
+                    });
 
                 }
                 else
                 {
-                    horarioFraccionList.Add(new HorarioFragmento() 
-                        {
-                            DiaId = dia.DiaId,
-                            HoraInicio = new TimeSpan(0,0,0),
-                            HoraFin = new TimeSpan(6,0,0)
-                        }
+                    horarioFraccionList.Add(new HorarioFragmento()
+                    {
+                        DiaId = dia.DiaId,
+                        HoraInicio = new TimeSpan(22, 0, 0),
+                        HoraFin = new TimeSpan(23, 59, 59)
+                    }
                     );
 
-                    horarioFraccionList.Add( new HorarioFragmento()
-                        {
-                             DiaId = dia.DiaId,
-                            HoraInicio = new TimeSpan(10,0,0),
-                            HoraFin = new TimeSpan(18,0,0)
-                        }
-                    );
+                    horarioFraccionList.Add(new HorarioFragmento()
+                    {
+                        DiaId = dia.DiaId+1,
+                        HoraInicio = new TimeSpan(0, 0, 0),
+                        HoraFin = new TimeSpan(6, 0, 0)
+                    });
+
                 }
-
+                
             }
             
             var horario = _dbContext.Horarios.FirstOrDefault(hr=>hr.Abreviatura.Equals("III"));
@@ -214,16 +221,24 @@ namespace HorariosConsoleApp.Services
                 List<HoraDetalle> listHoras = new List<HoraDetalle>();
                 var hora = fragmento.HoraInicio.Hours;
                 var horaFin = fragmento.HoraFin.Hours;
-
+                horaFin = horaFin == 23 ? 24 : horaFin;
+                var horasLaboral = 0;
+                var extra = false;
                 while (hora < horaFin)
                 {
+                    horasLaboral++;
+                    if (horasLaboral > 8)
+                    {
+                        extra = true;
+                    }
                     var detalleHora = new HoraDetalle()
                     {
                         Hora = new TimeSpan(hora,0,0),
                         HorarioFragmentoId = fragmento.HorarioFragmentoId,
-                        TipoHoraId = Workday.CheckHour(hora,dia)
+                        TipoHoraId = Workday.CheckHour(hora,dia,extra)
                     };
                     listHoras.Add(detalleHora);
+
                     hora++;
                 }
 
@@ -240,8 +255,8 @@ namespace HorariosConsoleApp.Services
             if(HorarioFragmentoB()) mensajes.Add("Fragmento B done");
             if(HorarioFragmentoC()) mensajes.Add("Fragmento C done");
             if(GenerarHoraDetalle("I") 
-            &&GenerarHoraDetalle("II")
-            &&GenerarHoraDetalle("III")) mensajes.Add("HorasDetalle done");
+               &&GenerarHoraDetalle("II")
+               &&GenerarHoraDetalle("III")) mensajes.Add("HorasDetalle done");
             return mensajes;
 
         }
