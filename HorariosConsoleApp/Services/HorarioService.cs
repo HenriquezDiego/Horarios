@@ -227,7 +227,7 @@ namespace HorariosConsoleApp.Services
                 while (hora < horaFin)
                 {
                     horasLaboral++;
-                    if (horasLaboral > 8)
+                    if (horasLaboral > 8 || (fragmento.Dia.DiaId==1 && fragmento.HoraInicio.Hours==0))
                     {
                         extra = true;
                     }
