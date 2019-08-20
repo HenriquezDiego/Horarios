@@ -20,45 +20,41 @@ namespace HorariosConsoleApp.Services
             var fecha = fechaInicio;
             var listFechas = new List<string>();
             var logCambioHorarios = _dbContext.CambioHorarios
-                .Where(log=>log.FechaFin!=null && log.FechaInicio.Month==fechaInicio.Month
-                                               &&log.FechaInicio.Year==fechaInicio.Year)
+                .Where(log=>log.FechaFin!=null && fechaInicio>= log.FechaInicio && fechaFin<=log.FechaFin)
                 .ToList();
 
             var empleados = _dbContext.Empleados
                             .Include(em=>em.Equipo)
-                            .ThenInclude(em=>em.Horario).ToList();
+                            .ThenInclude(em=>em.Horario).Take(1).ToList();
 
 
             var horasDetalle = _dbContext.ConsultaHoraDetalle.ToList();
             
             foreach (var empleado in empleados)
             {
-                var horario = empleado.Equipo.Horario.Alias;
+                string horario;
                 //var salarioHora = (empleado.SalarioBase/30)/empleado.Equipo.Horario.HorasEfectivas;
                 var salarioHora = (empleado.SalarioBase/30)/8;
                 
-                if (fechaFin > fechaInicio)
-                {
-                    if (fechaInicio.Month == fechaFin.Month)
-                    {
                         while (fecha<=fechaFin)
                         {
-                            var dia = fechaInicio.DayOfWeek == 0 ? 7 : (int) fechaInicio.DayOfWeek;
+                            var dia = fecha.DayOfWeek == 0 ? 7 : (int) fecha.DayOfWeek;
                             
                             var pagoEmpleado = new PagoEmpleado()
                             {
                                 EmpleadoId = empleado.EmpleadoId,
                                 Equipo = empleado.Equipo.Nombre,
-                                Horario =  empleado.Equipo.Horario.Alias,
                                 Dia = dia.ToString(),
-                                FechaPago = fechaInicio,
+                                FechaPago = fecha,
                                 SalarioHora = salarioHora,
                                 DetallePago = new List<DetallePagoEmpleado>()
                             };
 
+                            //lista test
                             listFechas.Add(fechaInicio.ToString());
 
 
+                            horario = empleado.Equipo.Horario.Alias;
                             if (logCambioHorarios.Any())
                             { 
                                 var cambio = logCambioHorarios
@@ -66,9 +62,9 @@ namespace HorariosConsoleApp.Services
                                 horario = cambio.Horario;
                             }
 
+                            pagoEmpleado.Horario = horario;
                             
-
-                            horasDetalle = horasDetalle.Where(hd => hd.Horario.Equals(horario)
+                            var horasDia = horasDetalle.Where(hd => hd.Horario.Equals(horario)
                                                                   &&hd.DiaId==dia).ToList();
 
 
@@ -82,16 +78,11 @@ namespace HorariosConsoleApp.Services
                                 });
                             }
 
-                            fecha = fecha.AddDays(1);
-
                             _dbContext.PagoEmpleados.Add(pagoEmpleado);
+                            fecha = fecha.AddDays(1);
                         }
 
                         fecha = fechaInicio;
-                    }
-                
-                }
-
             }
 
             _dbContext.SaveChanges();
