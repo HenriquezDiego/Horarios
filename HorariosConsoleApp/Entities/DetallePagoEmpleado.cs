@@ -3,6 +3,7 @@
     public class DetallePagoEmpleado
     {
         public int DetallePagoEmpleadoId { get; set; }
+        public int PagoEmpleadoId { get; set; }
         public double CantidadHoras { get; set; }
         public string TipoHora { get; set; }
         public decimal Porcentaje { get; set; }

@@ -3,6 +3,8 @@ using HorariosConsoleApp.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
+using HorariosConsoleApp.Repositories;
 
 namespace HorariosConsoleApp
 {
@@ -16,12 +18,12 @@ namespace HorariosConsoleApp
             services.AddTransient<IHorarioService, HorarioService>();
             services.AddTransient<ISeedService, SeedService>();
             services.AddSingleton<IPagoEmpleadoService, PagoEmpleadoService>();
+            services.AddTransient<IPagoRepository, PagoRepository>();
 
 
             var serviceProvider = services.BuildServiceProvider();
             var seedService = serviceProvider.GetService<ISeedService>();
             var calcularPago = serviceProvider.GetService<IPagoEmpleadoService>();
-
             try
             {
                 using (var appDbContext = new AppDbContext())
@@ -29,7 +31,7 @@ namespace HorariosConsoleApp
                     Console.WriteLine("Horarios Console App");
 
                     Console.WriteLine(@"Antes de continuar verifique no tenga ninguna versión de la base de datos creada. Desea continuar (y/n)?");
-                   
+
                     if (Console.ReadKey().Key == ConsoleKey.Y)
                     {
                         Console.WriteLine("");
@@ -43,7 +45,7 @@ namespace HorariosConsoleApp
                         Console.ReadLine();
                     }
 
-                   
+                    Console.ReadLine();
                 }
             }
             catch (Exception e)

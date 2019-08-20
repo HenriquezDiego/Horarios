@@ -25,7 +25,7 @@ namespace HorariosConsoleApp.Services
 
             var empleados = _dbContext.Empleados
                             .Include(em=>em.Equipo)
-                            .ThenInclude(em=>em.Horario).Take(1).ToList();
+                            .ThenInclude(em=>em.Horario).ToList();
 
 
             var horasDetalle = _dbContext.ConsultaHoraDetalle.ToList();
@@ -68,7 +68,7 @@ namespace HorariosConsoleApp.Services
                                                                   &&hd.DiaId==dia).ToList();
 
 
-                            foreach (var detalle in horasDetalle)
+                            foreach (var detalle in horasDia)
                             {
                                 pagoEmpleado.DetallePago.Add(new DetallePagoEmpleado()
                                 {
