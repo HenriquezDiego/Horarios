@@ -50,9 +50,9 @@ namespace HorariosConsoleApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("CantidadHoras");
+                    b.Property<decimal>("CantidadHoras");
 
-                    b.Property<int?>("PagoEmpleadoId");
+                    b.Property<int>("PagoEmpleadoId");
 
                     b.Property<decimal>("Porcentaje");
 

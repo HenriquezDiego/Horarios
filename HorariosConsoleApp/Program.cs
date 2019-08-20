@@ -3,7 +3,6 @@ using HorariosConsoleApp.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Linq;
 using HorariosConsoleApp.Repositories;
 
 namespace HorariosConsoleApp

@@ -13,6 +13,19 @@ namespace HorariosConsoleApp.Migrations
                 nullable: false,
                 oldClrType: typeof(double));
 
+            migrationBuilder.AlterColumn<int>(
+                name: "PagoEmpleadoId",
+                table: "DetallePagoEmpleados",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<decimal>(
+                name: "CantidadHoras",
+                table: "DetallePagoEmpleados",
+                nullable: false,
+                oldClrType: typeof(double));
+
             migrationBuilder.AlterColumn<DateTime>(
                 name: "FechaInicio",
                 table: "CambioHorarios",
@@ -25,6 +38,18 @@ namespace HorariosConsoleApp.Migrations
         {
             migrationBuilder.AlterColumn<double>(
                 name: "Porcentaje",
+                table: "DetallePagoEmpleados",
+                nullable: false,
+                oldClrType: typeof(decimal));
+
+            migrationBuilder.AlterColumn<int>(
+                name: "PagoEmpleadoId",
+                table: "DetallePagoEmpleados",
+                nullable: true,
+                oldClrType: typeof(int));
+
+            migrationBuilder.AlterColumn<double>(
+                name: "CantidadHoras",
                 table: "DetallePagoEmpleados",
                 nullable: false,
                 oldClrType: typeof(decimal));

@@ -24,7 +24,7 @@ namespace HorariosConsoleApp.Repositories
                     CantidadHora = deta.CantidadHoras,
                     deta.TipoHora,
                     deta.Porcentaje,
-                    Total = (decimal)deta.CantidadHoras*deta.Porcentaje*pago.SalarioHora
+                    Total = deta.CantidadHoras*deta.Porcentaje*pago.SalarioHora
                 };
 
             return mitnickQuery;

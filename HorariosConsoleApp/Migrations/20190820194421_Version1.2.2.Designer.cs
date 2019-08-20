@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HorariosConsoleApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190819202811_Version1.2.2")]
+    [Migration("20190820194421_Version1.2.2")]
     partial class Version122
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,9 +52,9 @@ namespace HorariosConsoleApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("CantidadHoras");
+                    b.Property<decimal>("CantidadHoras");
 
-                    b.Property<int?>("PagoEmpleadoId");
+                    b.Property<int>("PagoEmpleadoId");
 
                     b.Property<decimal>("Porcentaje");
 
