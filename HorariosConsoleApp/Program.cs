@@ -1,9 +1,11 @@
 ﻿using HorariosConsoleApp.Persistence;
 using HorariosConsoleApp.Services;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Globalization;
+using System.Linq;
 using HorariosConsoleApp.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace HorariosConsoleApp
 {
@@ -41,11 +43,43 @@ namespace HorariosConsoleApp
                         }
                         calcularPago.Calcular(new DateTime(2019, 8, 1), new DateTime(2019, 8, 31));
                         Console.WriteLine("¡Base de datos Generada!");
+                    
+                    }
+                    Console.WriteLine();
+                    Console.WriteLine(@"Desea verifica la consulta de prueba (MitnickQuery)?(y/n)?");
+                    if (Console.ReadKey().Key == ConsoleKey.Y)
+                    {
+                        var mitnickQuery = from deta in appDbContext.DetallePagoEmpleados
+                            join pago in appDbContext.PagoEmpleados on deta.PagoEmpleadoId equals pago.PagoEmpleadoId
+                            select new
+                            {
+                                pago.EmpleadoId,
+                                pago.Dia,
+                                CantidadHora = deta.CantidadHoras,
+                                deta.TipoHora,
+                                deta.Porcentaje,
+                                Total = deta.CantidadHoras * (deta.Porcentaje / 100) * pago.SalarioHora
+                            };
+
+                        var result = mitnickQuery.GroupBy(m => new {m.EmpleadoId, m.Dia}).Select(m => new
+                        {
+                            m.Key.EmpleadoId,
+                            m.Key.Dia,
+                            Total = m.Sum(l => l.Total)
+                        });
+
+                        Console.WriteLine();
+                        foreach (var value in result)
+                        {
+                            Console.WriteLine($"{value.EmpleadoId} - {value.Dia} - " +
+                                              $"{value.Total.ToString("#.00", CultureInfo.InvariantCulture)}");
+                        }
+
                         Console.ReadLine();
                     }
-
-                    Console.ReadLine();
                 }
+
+
             }
             catch (Exception e)
             {

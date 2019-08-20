@@ -21,11 +21,15 @@ namespace HorariosConsoleApp.Repositories
                 join pago in ContaContext.PagoEmpleados on deta.PagoEmpleadoId equals pago.PagoEmpleadoId
                 select new
                 {
+                    pago.EmpleadoId,
+                    pago.Dia,
                     CantidadHora = deta.CantidadHoras,
                     deta.TipoHora,
                     deta.Porcentaje,
                     Total = deta.CantidadHoras*deta.Porcentaje*pago.SalarioHora
                 };
+
+            
 
             return mitnickQuery;
 
