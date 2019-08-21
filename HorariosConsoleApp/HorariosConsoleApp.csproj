@@ -8,6 +8,7 @@
   <ItemGroup>
     <Compile Remove="Migrations\20190819160001_AddedView.cs" />
     <Compile Remove="Migrations\20190819202811_Version1.2.2.cs" />
+    <Compile Remove="Migrations\20190821145358_Version1.2.3.cs" />
   </ItemGroup>
 
   <ItemGroup>

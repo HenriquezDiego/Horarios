@@ -217,20 +217,25 @@ namespace HorariosConsoleApp.Services
             
             foreach (var fragmento in fragmentosHorario)
             {
+                
                 var dia = fragmento.Dia.Abreviatura;
                 List<HoraDetalle> listHoras = new List<HoraDetalle>();
                 var hora = fragmento.HoraInicio.Hours;
                 var horaFin = fragmento.HoraFin.Hours;
                 horaFin = horaFin == 23 ? 24 : horaFin;
-                var horasLaboral = 0;
+                var horasTrabajadas = 0;
                 var extra = false;
                 while (hora < horaFin)
                 {
-                    horasLaboral++;
-                    if (horasLaboral > 8 || (fragmento.Dia.DiaId==1 && fragmento.HoraInicio.Hours==0))
+                    horasTrabajadas++;
+
+                    if (horasTrabajadas > 0 || (fragmento.Dia.DiaId==1 && fragmento.HoraInicio.Hours<6)
+                        || fragmento.Dia.DiaId==7 || fragmento.HoraInicio.Hours>=18 && fragmento.Dia.DiaId==6)
                     {
                         extra = true;
                     }
+
+
                     var detalleHora = new HoraDetalle()
                     {
                         Hora = new TimeSpan(hora,0,0),

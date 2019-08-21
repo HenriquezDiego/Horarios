@@ -41,7 +41,7 @@ namespace HorariosConsoleApp
                         {
                             Console.WriteLine(msj);
                         }
-                        calcularPago.Calcular(new DateTime(2019, 8, 1), new DateTime(2019, 8, 31));
+                        calcularPago.Calcular(new DateTime(2019, 7, 1), new DateTime(2019, 7, 31));
                         Console.WriteLine("¡Base de datos Generada!");
                     
                     }
@@ -58,13 +58,14 @@ namespace HorariosConsoleApp
                                 CantidadHora = deta.CantidadHoras,
                                 deta.TipoHora,
                                 deta.Porcentaje,
-                                Total = deta.CantidadHoras * (deta.Porcentaje / 100) * pago.SalarioHora
+                                Total = deta.CantidadHoras * (deta.Porcentaje / 100) * pago.SalarioBase
                             };
 
-                        var result = mitnickQuery.GroupBy(m => new {m.EmpleadoId, m.Dia}).Select(m => new
+                        var result = mitnickQuery.GroupBy(m => new {m.EmpleadoId,m.Dia,m.TipoHora}).Select(m => new
                         {
                             m.Key.EmpleadoId,
                             m.Key.Dia,
+                            m.Key.TipoHora,
                             Total = m.Sum(l => l.Total)
                         });
 

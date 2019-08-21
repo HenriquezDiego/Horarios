@@ -33,8 +33,7 @@ namespace HorariosConsoleApp.Services
             foreach (var empleado in empleados)
             {
                 string horario;
-                //var salarioHora = (empleado.SalarioBase/30)/empleado.Equipo.Horario.HorasEfectivas;
-                var salarioHora = (empleado.SalarioBase/30)/8;
+                //var salarioHora = (empleado.SalarioBase/30)/8;
                 
                         while (fecha<=fechaFin)
                         {
@@ -46,7 +45,7 @@ namespace HorariosConsoleApp.Services
                                 Equipo = empleado.Equipo.Nombre,
                                 Dia = dia.ToString(),
                                 FechaPago = fecha,
-                                SalarioHora = salarioHora,
+                                SalarioBase = empleado.SalarioBase,
                                 DetallePago = new List<DetallePagoEmpleado>()
                             };
 

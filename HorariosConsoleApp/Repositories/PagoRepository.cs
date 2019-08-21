@@ -26,7 +26,7 @@ namespace HorariosConsoleApp.Repositories
                     CantidadHora = deta.CantidadHoras,
                     deta.TipoHora,
                     deta.Porcentaje,
-                    Total = deta.CantidadHoras*deta.Porcentaje*pago.SalarioHora
+                    Total = deta.CantidadHoras*deta.Porcentaje*pago.SalarioBase
                 };
 
             

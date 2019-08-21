@@ -31,7 +31,7 @@ namespace HorariosConsoleApp.Persistence.EntityConfigurations
                     Descripcion = "Lunes a viernes de 2:00 am a 10:00 pm" +
                                   "Sabado de 10:00 am a 2:00 am y Domingo 6:00 am 6:00 pm",
                     Abreviatura = "II",
-                    Alias = "Rojo"
+                    Alias = "Rojo",
                 },
                 new Horario()
                 {
@@ -39,7 +39,7 @@ namespace HorariosConsoleApp.Persistence.EntityConfigurations
                     Descripcion = "Lunes a viernes de 10:00 pm a 6:00 am" +
                                   "Sabado de 2:00 pm a 6:00 am y Domingo 6:00 pm 6:00 am",
                     Abreviatura = "III",
-                    Alias = "Negro"
+                    Alias = "Negro",
                 }
             };
         }
