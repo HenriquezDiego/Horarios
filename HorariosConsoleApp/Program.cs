@@ -5,7 +5,6 @@ using System;
 using System.Globalization;
 using System.Linq;
 using HorariosConsoleApp.Helpers;
-using HorariosConsoleApp.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace HorariosConsoleApp
@@ -20,12 +19,12 @@ namespace HorariosConsoleApp
             services.AddTransient<IHorarioService, HorarioService>();
             services.AddTransient<ISeedService, SeedService>();
             services.AddSingleton<IPagoEmpleadoService, PagoEmpleadoService>();
-            services.AddTransient<IPagoRepository, PagoRepository>();
 
 
             var serviceProvider = services.BuildServiceProvider();
             var seedService = serviceProvider.GetService<ISeedService>();
             var calcularPago = serviceProvider.GetService<IPagoEmpleadoService>();
+
             try
             {
                 using (var appDbContext = new AppDbContext())
@@ -69,11 +68,12 @@ namespace HorariosConsoleApp
                                 Total = Math.Round(deta.CantidadHoras * (deta.Porcentaje / 100) * (pago.SalarioBase/30/ (deta.EsNocturna?Workday.HeN:Workday.HeD)),2)
                             };
 
-                        var result = mitnickQuery.GroupBy(m => new {m.Nombre,m.Dia,m.TipoHora}).Select(m => new
+                        var result = mitnickQuery.GroupBy(m => new {m.Nombre,m.Dia,m.TipoHora,m.Porcentaje})
+                            .Select(m => new
                         {
                             m.Key.Nombre,
                             m.Key.Dia,
-                            m.Key.TipoHora,
+                            m.Key.Porcentaje,
                             Total = m.Sum(l => l.Total)
                         }).OrderBy(m=>m.Nombre);
 
@@ -81,8 +81,7 @@ namespace HorariosConsoleApp
                         Console.WriteLine();
                         foreach (var value in result)
                         {
-                            Console.WriteLine($"{value.Nombre} - {value.Dia} - " +
-                                              $"{value.Total.ToString("F", CultureInfo.InvariantCulture)}");
+                            Console.WriteLine($"{value.Nombre} - {value.Dia} - {value.Porcentaje}% - " + $"{value.Total.ToString("F", CultureInfo.InvariantCulture)}");
                         }
 
                        

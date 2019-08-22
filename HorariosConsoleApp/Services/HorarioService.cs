@@ -217,7 +217,7 @@ namespace HorariosConsoleApp.Services
             
             foreach (var fragmento in fragmentosHorario)
             {
-                var horasEfectivas = (Workday.CheckSection(fragmento.HoraInicio, fragmento.HoraFin)) ? Workday.HeN : Workday.HeD;
+                var horasEfectivas = (Workday.EsNocturno(fragmento.HoraInicio, fragmento.HoraFin)) ? Workday.HeN : Workday.HeD;
 
                 var dia = fragmento.Dia.Abreviatura;
                 List<HoraDetalle> listHoras = new List<HoraDetalle>();

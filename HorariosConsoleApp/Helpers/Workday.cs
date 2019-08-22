@@ -58,7 +58,7 @@ namespace HorariosConsoleApp.Helpers
         }
 
         //Validad si la sección o fragmento tiene en su mayoría horas nocturnas, de serlo devuelve true
-        public static bool CheckSection(TimeSpan start , TimeSpan end)
+        public static bool EsNocturno(TimeSpan start , TimeSpan end)
         {
             var hoursD = 0;
             var hoursN = 0;

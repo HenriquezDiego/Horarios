@@ -5,6 +5,6 @@ namespace HorariosConsoleApp.Services
 {
     public interface IPagoEmpleadoService
     {
-        IEnumerable<string> Calcular(DateTime fechaInicio, DateTime fechaFin);
+        void Calcular(DateTime fechaInicio, DateTime fechaFin);
     }
 }

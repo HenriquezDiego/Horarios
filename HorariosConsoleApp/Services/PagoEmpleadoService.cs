@@ -15,10 +15,9 @@ namespace HorariosConsoleApp.Services
         {
             _dbContext = dbContext;
         }
-        public IEnumerable<string> Calcular(DateTime fechaInicio, DateTime fechaFin)
+        public void Calcular(DateTime fechaInicio, DateTime fechaFin)
         {
             var fecha = fechaInicio;
-            var listFechas = new List<string>();
             var logCambioHorarios = _dbContext.CambioHorarios
                 .Where(log=>log.FechaFin!=null && fechaInicio>= log.FechaInicio && fechaFin<=log.FechaFin)
                 .ToList();
@@ -48,10 +47,6 @@ namespace HorariosConsoleApp.Services
                                 SalarioBase = empleado.SalarioBase,
                                 DetallePago = new List<DetallePagoEmpleado>()
                             };
-
-                            //lista test
-                            listFechas.Add(fechaInicio.ToString());
-
 
                             horario = empleado.Equipo.Horario.Alias;
                             if (logCambioHorarios.Any())
@@ -86,7 +81,6 @@ namespace HorariosConsoleApp.Services
             }
 
             _dbContext.SaveChanges();
-            return listFechas;
         }
 
     }
