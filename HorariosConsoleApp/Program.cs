@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Globalization;
 using System.Linq;
+using HorariosConsoleApp.Helpers;
 using HorariosConsoleApp.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -58,7 +59,7 @@ namespace HorariosConsoleApp
                                 CantidadHora = deta.CantidadHoras,
                                 deta.TipoHora,
                                 deta.Porcentaje,
-                                Total = deta.CantidadHoras * (deta.Porcentaje / 100) * pago.SalarioBase
+                                Total = deta.CantidadHoras * (deta.Porcentaje / 100) * (pago.SalarioBase/30/(deta.EsNocturna?Workday.HeN:Workday.HeD))
                             };
 
                         var result = mitnickQuery.GroupBy(m => new {m.EmpleadoId,m.Dia,m.TipoHora}).Select(m => new
@@ -73,14 +74,16 @@ namespace HorariosConsoleApp
                         foreach (var value in result)
                         {
                             Console.WriteLine($"{value.EmpleadoId} - {value.Dia} - " +
-                                              $"{value.Total.ToString("#.00", CultureInfo.InvariantCulture)}");
+                                              $"{value.Total.ToString("##.00", CultureInfo.InvariantCulture)}");
                         }
 
+                       
                         Console.ReadLine();
                     }
+                    
                 }
 
-
+                
             }
             catch (Exception e)
             {

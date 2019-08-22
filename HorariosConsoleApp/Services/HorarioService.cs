@@ -217,7 +217,8 @@ namespace HorariosConsoleApp.Services
             
             foreach (var fragmento in fragmentosHorario)
             {
-                
+                var horasEfectivas = (Workday.CheckSection(fragmento.HoraInicio, fragmento.HoraFin)) ? Workday.HeN : Workday.HeD;
+
                 var dia = fragmento.Dia.Abreviatura;
                 List<HoraDetalle> listHoras = new List<HoraDetalle>();
                 var hora = fragmento.HoraInicio.Hours;
@@ -229,7 +230,7 @@ namespace HorariosConsoleApp.Services
                 {
                     horasTrabajadas++;
 
-                    if (horasTrabajadas > 0 || (fragmento.Dia.DiaId==1 && fragmento.HoraInicio.Hours<6)
+                    if (horasTrabajadas > horasEfectivas || fragmento.Dia.DiaId==1 && fragmento.HoraInicio.Hours<6
                         || fragmento.Dia.DiaId==7 || fragmento.HoraInicio.Hours>=18 && fragmento.Dia.DiaId==6)
                     {
                         extra = true;

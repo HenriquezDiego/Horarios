@@ -73,7 +73,8 @@ namespace HorariosConsoleApp.Services
                                 {
                                     TipoHora = detalle.TipoHora,
                                     CantidadHoras = detalle.NumeroHoras,
-                                    Porcentaje = detalle.PorcentajeHora
+                                    Porcentaje = detalle.PorcentajeHora,
+                                    EsNocturna = detalle.EsNocturna
                                 });
                             }
 

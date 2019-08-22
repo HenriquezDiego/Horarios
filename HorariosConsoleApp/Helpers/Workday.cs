@@ -1,12 +1,29 @@
-﻿namespace HorariosConsoleApp.Helpers
+﻿using System;
+
+namespace HorariosConsoleApp.Helpers
 {
     public static class Workday
     {
-        public const int HoraNocturna = 19;
+        /// <summary>
+        /// Inicio de horas nocturnas
+        /// </summary>
+        public const int IhN = 19;
+        /// <summary>
+        /// Fin de horas nocturnas
+        /// </summary>
+        public const int FhN = 5;
+        /// <summary>
+        /// Horas "efectivas" nocturnas
+        /// </summary>
+        public const int HeN = 7;
+        /// <summary>
+        ///  Horas "efectivas" diurnas
+        /// </summary>
+        public const int HeD = 8;
         public static int CheckHour(int hour, string day,bool extra=false)
         {
 
-            if (hour > 5 && hour < HoraNocturna)
+            if (hour > FhN && hour < IhN)
             {
                 switch (day)
                 {
@@ -21,7 +38,7 @@
                 }
             }
 
-            if (hour >= HoraNocturna || hour >= 0)
+            if (hour >= IhN || hour >= 0)
             {
                 switch (day)
                 {
@@ -38,6 +55,27 @@
             }
 
             return 1;
+        }
+
+        //Validad si la sección o fragmento tiene en su mayoría horas nocturnas, de serlo devuelve true
+        public static bool CheckSection(TimeSpan start , TimeSpan end)
+        {
+            var hoursD = 0;
+            var hoursN = 0;
+
+            for (var i = start.Hours; i < end.Hours; i++)
+            {
+                if (i > 18 && i < 23 || i > 0 && i < 6)
+                {
+                    hoursN++;
+                }
+                else
+                {
+                    hoursD++;
+                }
+            }
+
+            return hoursN>hoursD;
         }
     }
 }
