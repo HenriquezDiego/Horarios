@@ -42,39 +42,47 @@ namespace HorariosConsoleApp
                         {
                             Console.WriteLine(msj);
                         }
-                        calcularPago.Calcular(new DateTime(2019, 7, 1), new DateTime(2019, 7, 31));
                         Console.WriteLine("¡Base de datos Generada!");
-                    
                     }
+                    Console.WriteLine();
+                    Console.WriteLine(@"Desea CalcularPagoEmpleado?(y/n)?");
+                    if (Console.ReadKey().Key == ConsoleKey.Y)
+                    {
+                        calcularPago.Calcular(new DateTime(2019, 7, 1), new DateTime(2019, 7, 28));
+                        
+                    }
+
                     Console.WriteLine();
                     Console.WriteLine(@"Desea verifica la consulta de prueba (MitnickQuery)?(y/n)?");
                     if (Console.ReadKey().Key == ConsoleKey.Y)
                     {
                         var mitnickQuery = from deta in appDbContext.DetallePagoEmpleados
                             join pago in appDbContext.PagoEmpleados on deta.PagoEmpleadoId equals pago.PagoEmpleadoId
+                            join emp in appDbContext.Empleados on pago.EmpleadoId  equals emp.EmpleadoId
                             select new
                             {
-                                pago.EmpleadoId,
+                                Nombre = $"{emp.EmpleadoId}-{emp.Nombre} {emp.Apellido}",
                                 pago.Dia,
                                 CantidadHora = deta.CantidadHoras,
                                 deta.TipoHora,
                                 deta.Porcentaje,
-                                Total = deta.CantidadHoras * (deta.Porcentaje / 100) * (pago.SalarioBase/30/(deta.EsNocturna?Workday.HeN:Workday.HeD))
+                                Total = Math.Round(deta.CantidadHoras * (deta.Porcentaje / 100) * (pago.SalarioBase/30/ (deta.EsNocturna?Workday.HeN:Workday.HeD)),2)
                             };
 
-                        var result = mitnickQuery.GroupBy(m => new {m.EmpleadoId,m.Dia,m.TipoHora}).Select(m => new
+                        var result = mitnickQuery.GroupBy(m => new {m.Nombre,m.Dia,m.TipoHora}).Select(m => new
                         {
-                            m.Key.EmpleadoId,
+                            m.Key.Nombre,
                             m.Key.Dia,
                             m.Key.TipoHora,
                             Total = m.Sum(l => l.Total)
-                        });
+                        }).OrderBy(m=>m.Nombre);
 
+                        
                         Console.WriteLine();
                         foreach (var value in result)
                         {
-                            Console.WriteLine($"{value.EmpleadoId} - {value.Dia} - " +
-                                              $"{value.Total.ToString("##.00", CultureInfo.InvariantCulture)}");
+                            Console.WriteLine($"{value.Nombre} - {value.Dia} - " +
+                                              $"{value.Total.ToString("F", CultureInfo.InvariantCulture)}");
                         }
 
                        
