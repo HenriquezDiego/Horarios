@@ -63,14 +63,21 @@ namespace HorariosConsoleApp.Helpers
         /// </summary>
         /// <param name="start"></param>
         /// <param name="end"></param>
-        public static bool IsNightly(TimeSpan start , TimeSpan end)
+        public static bool IsNightly(TimeSpan start, TimeSpan end)
         {
             var hoursD = 0;
             var hoursN = 0;
-
-            for (var i = start.Hours; i < end.Hours; i++)
+            var hours = Math.Abs(end.Hours - start.Hours);
+            var flag = 0;
+            var startHours = start.Hours;
+            while (flag<hours)
             {
-                if (i > 18 && i < 23 || i > 0 && i < 6)
+                if (startHours == 24)
+                {
+                    startHours = 0;
+                    hours = end.Hours;
+                } 
+                if (startHours > 18 && startHours <= 23 || startHours >= 0 && startHours < 6)
                 {
                     hoursN++;
                 }
@@ -78,6 +85,9 @@ namespace HorariosConsoleApp.Helpers
                 {
                     hoursD++;
                 }
+
+                startHours++;
+                flag++;
             }
 
             return hoursN>hoursD;

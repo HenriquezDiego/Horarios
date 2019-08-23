@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorariosConsoleApp", "HorariosConsoleApp\HorariosConsoleApp.csproj", "{FE043CDC-34C0-4DB9-B45A-7C9E1421FF2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorariosConsoleApp", "HorariosConsoleApp\HorariosConsoleApp.csproj", "{FE043CDC-34C0-4DB9-B45A-7C9E1421FF2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorariosConsoleApp.Test", "HorariosConsoleApp.Test\HorariosConsoleApp.Test.csproj", "{41624D13-B3E4-4C2D-A05A-62E0C02ED757}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{FE043CDC-34C0-4DB9-B45A-7C9E1421FF2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE043CDC-34C0-4DB9-B45A-7C9E1421FF2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE043CDC-34C0-4DB9-B45A-7C9E1421FF2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41624D13-B3E4-4C2D-A05A-62E0C02ED757}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41624D13-B3E4-4C2D-A05A-62E0C02ED757}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41624D13-B3E4-4C2D-A05A-62E0C02ED757}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41624D13-B3E4-4C2D-A05A-62E0C02ED757}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
