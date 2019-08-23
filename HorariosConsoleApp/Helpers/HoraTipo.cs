@@ -44,6 +44,6 @@
         /// <summary>
         /// Hora Extra Nocturna Domingo
         /// </summary>
-        Hend =10
+        Hend = 10
     }
 }

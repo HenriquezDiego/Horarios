@@ -58,7 +58,12 @@ namespace HorariosConsoleApp.Helpers
         }
 
         //Validad si la sección o fragmento tiene en su mayoría horas nocturnas, de serlo devuelve true
-        public static bool EsNocturno(TimeSpan start , TimeSpan end)
+        /// <summary>
+        /// Verifica si una lapso de tiempo contiene mas horas nocturnas que diurnas
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        public static bool IsNightly(TimeSpan start , TimeSpan end)
         {
             var hoursD = 0;
             var hoursN = 0;
