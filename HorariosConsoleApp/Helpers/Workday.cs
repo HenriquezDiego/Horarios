@@ -70,14 +70,17 @@ namespace HorariosConsoleApp.Helpers
             var hours = Math.Abs(end.Hours - start.Hours);
             var flag = 0;
             var startHours = start.Hours;
+
             while (flag<hours)
             {
                 if (startHours == 24)
                 {
                     startHours = 0;
                     hours = end.Hours;
-                } 
-                if (startHours > 18 && startHours <= 23 || startHours >= 0 && startHours < 6)
+                }
+
+                if (startHours > 18 && startHours <= 23 
+                    || startHours >= 0 && startHours < 6)
                 {
                     hoursN++;
                 }
