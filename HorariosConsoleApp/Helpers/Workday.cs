@@ -1,5 +1,5 @@
-﻿using System;
-
+﻿using HorariosConsoleApp.Helpers.DateInformation;
+using System;
 namespace HorariosConsoleApp.Helpers
 {
     public static class Workday
@@ -96,14 +96,14 @@ namespace HorariosConsoleApp.Helpers
             return hoursN>hoursD;
         }
 
-        public static object DateInfo(DateTime date)
+        public static MonthInfo DateInfo(DateTime date)
         {
             var month = date.Month;
             var year = date.Year;
             var days = DateTime.DaysInMonth(year, month);
             var saturdays = 0;
             var sundays = 0;
-            var week = 0;
+            var weekdays = 0;
             for (var i = 0; i < 31; i++)
             {
                 switch (date.DayOfWeek)
@@ -115,7 +115,7 @@ namespace HorariosConsoleApp.Helpers
                         sundays++;
                         break;
                     default:
-                        week++;
+                        weekdays++;
                         break;
 
                 }
@@ -124,14 +124,19 @@ namespace HorariosConsoleApp.Helpers
             }
 
 
-            return new
+            return new MonthInfo()
             {
-                month,
-                days,
-                saturdays,
-                sundays,
-                week
+                Days = days,
+                Saturdays = saturdays,
+                Sundays = sundays,
+                Weekdays = weekdays
             };
         }
+
+        public static MonthInfo DateInfo(int year,int month)
+        {
+            var date = new DateTime(year,month,1);
+            return DateInfo(date);
+        } 
     }
 }

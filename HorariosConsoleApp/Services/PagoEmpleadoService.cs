@@ -76,5 +76,17 @@ namespace HorariosConsoleApp.Services
             _dbContext.SaveChanges();
         }
 
+        public void Calcular(DateTime fecha)
+        {
+            var empleados = _dbContext.Empleados
+                .Include(em=>em.Equipo)
+                .ThenInclude(em=>em.Horario).ToList();
+
+            foreach (var empleado in empleados)
+            {
+                
+            }
+
+        }
     }
 }

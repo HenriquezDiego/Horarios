@@ -14,6 +14,20 @@ namespace HorariosConsoleApp.Test
             Assert.True(flag);
         }
 
+        [Fact]
+        public void InformacionDiasAgostoCorrecto()
+        {
+            var infoDate = Workday.DateInfo(new DateTime(2019, 8, 1)); 
+            Assert.Equal(31,infoDate.Days);
+        }
+
+        [Fact]
+        public void InformacionDomingosAgostoSobreCarga()
+        {
+            var infoDate = Workday.DateInfo(2019,8); 
+            Assert.Equal(4,infoDate.Sundays);
+        }
+
         
     }
 }
