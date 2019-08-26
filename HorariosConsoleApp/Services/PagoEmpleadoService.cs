@@ -1,9 +1,8 @@
-﻿using HorariosConsoleApp.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using HorariosConsoleApp.Entities;
+﻿using HorariosConsoleApp.Entities;
+using HorariosConsoleApp.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
 namespace HorariosConsoleApp.Services
 {
@@ -18,9 +17,6 @@ namespace HorariosConsoleApp.Services
         public void Calcular(DateTime fechaInicio, DateTime fechaFin)
         {
             var fecha = fechaInicio;
-            var logCambioHorarios = _dbContext.CambioHorarios
-                .Where(log=>log.FechaFin!=null && fechaInicio>= log.FechaInicio && fechaFin<=log.FechaFin)
-                .ToList();
 
             var empleados = _dbContext.Empleados
                             .Include(em=>em.Equipo)
@@ -42,17 +38,16 @@ namespace HorariosConsoleApp.Services
                         EmpleadoId = empleado.EmpleadoId,
                         Equipo = empleado.Equipo.Nombre,
                         Fecha = fecha,
-                        SalarioBase = empleado.SalarioBase,
-                        DetallePago = new List<DetallePagoEmpleado>()
+                        SalarioBase = empleado.SalarioBase
                     };
 
                     horario = empleado.Equipo.Horario.Alias;
-                    if (logCambioHorarios.Any())
-                    { 
-                        var cambio = logCambioHorarios
-                            .FirstOrDefault(log => log.EmpleadoId == empleado.EmpleadoId                            &&fechaInicio>=log.FechaInicio&&fechaInicio<=log.FechaFin);
-                        horario = cambio.Horario;
-                    }
+                    //if (logCambioHorarios.Any())
+                    //{ 
+                    //    var cambio = logCambioHorarios
+                    //        .FirstOrDefault(log => log.EmpleadoId == empleado.EmpleadoId                            &&fechaInicio>=log.FechaInicio&&fechaInicio<=log.FechaFin);
+                    //    horario = cambio.Horario;
+                    //}
 
                     pagoEmpleado.Horario = horario;
                             
@@ -62,13 +57,13 @@ namespace HorariosConsoleApp.Services
 
                     foreach (var detalle in horasDia)
                     {
-                        pagoEmpleado.DetallePago.Add(new DetallePagoEmpleado()
-                        {
-                            TipoHora = detalle.TipoHora,
-                            CantidadHoras = detalle.NumeroHoras,
-                            Porcentaje = detalle.PorcentajeHora,
-                            EsNocturna = detalle.EsNocturna
-                        });
+                        //pagoEmpleado.DetallePago.Add(new DetallePagoEmpleado()
+                        //{
+                        //    TipoHora = detalle.TipoHora,
+                        //    CantidadHoras = detalle.NumeroHoras,
+                        //    Porcentaje = detalle.PorcentajeHora,
+                        //    EsNocturna = detalle.EsNocturna
+                        //});
                     }
 
                     _dbContext.PagoEmpleados.Add(pagoEmpleado);

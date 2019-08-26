@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using HorariosConsoleApp.Entities;
+﻿using HorariosConsoleApp.Entities;
 using HorariosConsoleApp.Persistence.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace HorariosConsoleApp.Persistence
 {
@@ -14,15 +14,13 @@ namespace HorariosConsoleApp.Persistence
         public DbSet<TipoHora> TipoHoras { get; set; }
         public DbSet<Dia> Dias { get; set; }
         public DbSet<Horario> Horarios { get; set; }
-        public DbSet<CambioHorario> CambioHorarios { get; set; }
         public DbSet<PagoEmpleado> PagoEmpleados { get; set; }
-        public DbSet<DetallePagoEmpleado> DetallePagoEmpleados { get; set; }
         public DbQuery<ConsultaDetalleHoras> ConsultaHoraDetalle { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "server=localhost;Database=HorarioDbV1.2.3;Integrated Security=true;MultipleActiveResultSets=true;");
+                "server=localhost;Database=HorarioDbV2.0.0;Integrated Security=true;MultipleActiveResultSets=true;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

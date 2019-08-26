@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HorariosConsoleApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190821203240_AddedEsNocturna")]
-    partial class AddedEsNocturna
+    [Migration("20190826191040_Version2.0.0")]
+    partial class Version200
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,54 +20,6 @@ namespace HorariosConsoleApp.Migrations
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("HorariosConsoleApp.Entities.CambioHorario", b =>
-                {
-                    b.Property<int>("CambioHorarioId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("EmpleadoId");
-
-                    b.Property<string>("Equipo");
-
-                    b.Property<DateTime?>("FechaFin");
-
-                    b.Property<DateTime>("FechaInicio");
-
-                    b.Property<string>("Horario");
-
-                    b.Property<double>("TotalAsueto");
-
-                    b.HasKey("CambioHorarioId");
-
-                    b.HasIndex("EmpleadoId");
-
-                    b.ToTable("CambioHorarios");
-                });
-
-            modelBuilder.Entity("HorariosConsoleApp.Entities.DetallePagoEmpleado", b =>
-                {
-                    b.Property<int>("DetallePagoEmpleadoId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("CantidadHoras");
-
-                    b.Property<bool>("EsNocturna");
-
-                    b.Property<int>("PagoEmpleadoId");
-
-                    b.Property<decimal>("Porcentaje");
-
-                    b.Property<string>("TipoHora");
-
-                    b.HasKey("DetallePagoEmpleadoId");
-
-                    b.HasIndex("PagoEmpleadoId");
-
-                    b.ToTable("DetallePagoEmpleados");
-                });
 
             modelBuilder.Entity("HorariosConsoleApp.Entities.Dia", b =>
                 {
@@ -237,6 +189,8 @@ namespace HorariosConsoleApp.Migrations
 
                     b.Property<int>("DiaId");
 
+                    b.Property<bool>("EsNocturno");
+
                     b.Property<TimeSpan>("HoraFin");
 
                     b.Property<TimeSpan>("HoraInicio");
@@ -258,21 +212,23 @@ namespace HorariosConsoleApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Dia");
+                    b.Property<TimeSpan>("DiasCompensatorios");
+
+                    b.Property<TimeSpan>("DiasLaborados");
 
                     b.Property<int?>("EmpleadoId");
 
                     b.Property<string>("Equipo");
 
-                    b.Property<bool>("EsAsueto");
-
-                    b.Property<DateTime>("FechaPago");
+                    b.Property<DateTime>("Fecha");
 
                     b.Property<string>("Horario");
 
+                    b.Property<int>("PlanillaId");
+
                     b.Property<decimal>("SalarioBase");
 
-                    b.Property<double>("TotalAsueto");
+                    b.Property<decimal>("SalarioExtra");
 
                     b.HasKey("PagoEmpleadoId");
 
@@ -368,22 +324,6 @@ namespace HorariosConsoleApp.Migrations
                             Nombre = "Hora Extra Nocturna Domingo",
                             PorcentajeExtra = 350m
                         });
-                });
-
-            modelBuilder.Entity("HorariosConsoleApp.Entities.CambioHorario", b =>
-                {
-                    b.HasOne("HorariosConsoleApp.Entities.Empleado", "Empleado")
-                        .WithMany()
-                        .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("HorariosConsoleApp.Entities.DetallePagoEmpleado", b =>
-                {
-                    b.HasOne("HorariosConsoleApp.Entities.PagoEmpleado")
-                        .WithMany("DetallePago")
-                        .HasForeignKey("PagoEmpleadoId")
-                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("HorariosConsoleApp.Entities.Empleado", b =>

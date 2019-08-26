@@ -26,13 +26,11 @@ namespace HorariosConsoleApp.Services
         {
             var horarioFragmentos = _dbContext.HorariosFragmentos.ToList();
             var detallehoras = _dbContext.HoraDetalles.ToList();
-            var detallePago = _dbContext.DetallePagoEmpleados.ToList();
             var pagoEmpleado = _dbContext.PagoEmpleados;
             if (detallehoras.Count > 0 && horarioFragmentos.Count > 0)
             {
                 _dbContext.HoraDetalles.RemoveRange(detallehoras);
                 _dbContext.HorariosFragmentos.RemoveRange(horarioFragmentos);
-                _dbContext.DetallePagoEmpleados.RemoveRange(detallePago);
                 _dbContext.PagoEmpleados.RemoveRange(pagoEmpleado);
             }
 

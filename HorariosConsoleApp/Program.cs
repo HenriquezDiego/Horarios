@@ -55,34 +55,7 @@ namespace HorariosConsoleApp
                     Console.WriteLine(@"Desea verifica la consulta de prueba (MitnickQuery)?(y/n)?");
                     if (Console.ReadKey().Key == ConsoleKey.Y)
                     {
-                        var mitnickQuery = from deta in appDbContext.DetallePagoEmpleados
-                            join pago in appDbContext.PagoEmpleados on deta.PagoEmpleadoId equals pago.PagoEmpleadoId
-                            join emp in appDbContext.Empleados on pago.EmpleadoId  equals emp.EmpleadoId
-                            select new
-                            {
-                                Nombre = $"{emp.EmpleadoId}-{emp.Nombre} {emp.Apellido}",
-                                CantidadHora = deta.CantidadHoras,
-                                deta.TipoHora,
-                                deta.Porcentaje,
-                                Total = Math.Round(deta.CantidadHoras * (deta.Porcentaje / 100) * (pago.SalarioBase/30/ (deta.EsNocturna?Workday.HeN:Workday.HeD)),2)
-                            };
-
-                        var result = mitnickQuery.GroupBy(m => new {m.Nombre,m.TipoHora,m.Porcentaje})
-                            .Select(m => new
-                        {
-                            m.Key.Nombre,
-                            m.Key.Porcentaje,
-                            Total = m.Sum(l => l.Total)
-                        }).OrderBy(m=>m.Nombre);
-
-                        
-                        Console.WriteLine();
-                        foreach (var value in result)
-                        {
-                            Console.WriteLine($"{value.Nombre} - {value.Porcentaje}% - " + $"{value.Total.ToString("F", CultureInfo.InvariantCulture)}");
-                        }
-
-                       
+                        //TODO
                         Console.ReadLine();
                     }
                     
