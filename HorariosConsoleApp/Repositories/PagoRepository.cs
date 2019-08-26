@@ -17,21 +17,9 @@ namespace HorariosConsoleApp.Repositories
 
         public IEnumerable<object> GetCalculoPago(DateTime fechaInicio, DateTime fechaFin)
         {
-            var mitnickQuery = from deta in ContaContext.DetallePagoEmpleados
-                join pago in ContaContext.PagoEmpleados on deta.PagoEmpleadoId equals pago.PagoEmpleadoId
-                select new
-                {
-                    pago.EmpleadoId,
-                    pago.Dia,
-                    CantidadHora = deta.CantidadHoras,
-                    deta.TipoHora,
-                    deta.Porcentaje,
-                    Total = deta.CantidadHoras*deta.Porcentaje*pago.SalarioBase
-                };
+          
 
-            
-
-            return mitnickQuery;
+            return null;
 
         }
     }

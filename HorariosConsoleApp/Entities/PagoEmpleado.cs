@@ -12,10 +12,10 @@ namespace HorariosConsoleApp.Entities
         public decimal SalarioBase { get; set; }
         public string Equipo { get; set; }
         public string Horario { get; set; }
-        public string Dia { get; set; }
-        public DateTime FechaPago { get; set; }
-        public bool EsAsueto { get; set; }
-        public double TotalAsueto { get; set; }
+        public DateTime Fecha { get; set; }
+        public TimeSpan DiasLaborados { get; set; }
+        public TimeSpan DiasCompensatorios{ get; set; }
+        public int PlanillaId { get; set; }
         public List<DetallePagoEmpleado> DetallePago { get; set; }
 
     }

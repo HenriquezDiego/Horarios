@@ -41,8 +41,7 @@ namespace HorariosConsoleApp.Services
                     {
                         EmpleadoId = empleado.EmpleadoId,
                         Equipo = empleado.Equipo.Nombre,
-                        Dia = dia.ToString(),
-                        FechaPago = fecha,
+                        Fecha = fecha,
                         SalarioBase = empleado.SalarioBase,
                         DetallePago = new List<DetallePagoEmpleado>()
                     };

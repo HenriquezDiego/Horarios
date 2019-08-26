@@ -95,5 +95,43 @@ namespace HorariosConsoleApp.Helpers
 
             return hoursN>hoursD;
         }
+
+        public static object DateInfo(DateTime date)
+        {
+            var month = date.Month;
+            var year = date.Year;
+            var days = DateTime.DaysInMonth(year, month);
+            var saturdays = 0;
+            var sundays = 0;
+            var week = 0;
+            for (var i = 0; i < 31; i++)
+            {
+                switch (date.DayOfWeek)
+                {
+                    case DayOfWeek.Saturday:
+                        saturdays++;
+                        break;
+                    case DayOfWeek.Sunday:
+                        sundays++;
+                        break;
+                    default:
+                        week++;
+                        break;
+
+                }
+
+                date=date.AddDays(1);
+            }
+
+
+            return new
+            {
+                month,
+                days,
+                saturdays,
+                sundays,
+                week
+            };
+        }
     }
 }

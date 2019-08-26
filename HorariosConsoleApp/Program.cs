@@ -61,18 +61,16 @@ namespace HorariosConsoleApp
                             select new
                             {
                                 Nombre = $"{emp.EmpleadoId}-{emp.Nombre} {emp.Apellido}",
-                                pago.Dia,
                                 CantidadHora = deta.CantidadHoras,
                                 deta.TipoHora,
                                 deta.Porcentaje,
                                 Total = Math.Round(deta.CantidadHoras * (deta.Porcentaje / 100) * (pago.SalarioBase/30/ (deta.EsNocturna?Workday.HeN:Workday.HeD)),2)
                             };
 
-                        var result = mitnickQuery.GroupBy(m => new {m.Nombre,m.Dia,m.TipoHora,m.Porcentaje})
+                        var result = mitnickQuery.GroupBy(m => new {m.Nombre,m.TipoHora,m.Porcentaje})
                             .Select(m => new
                         {
                             m.Key.Nombre,
-                            m.Key.Dia,
                             m.Key.Porcentaje,
                             Total = m.Sum(l => l.Total)
                         }).OrderBy(m=>m.Nombre);
@@ -81,7 +79,7 @@ namespace HorariosConsoleApp
                         Console.WriteLine();
                         foreach (var value in result)
                         {
-                            Console.WriteLine($"{value.Nombre} - {value.Dia} - {value.Porcentaje}% - " + $"{value.Total.ToString("F", CultureInfo.InvariantCulture)}");
+                            Console.WriteLine($"{value.Nombre} - {value.Porcentaje}% - " + $"{value.Total.ToString("F", CultureInfo.InvariantCulture)}");
                         }
 
                        
