@@ -159,12 +159,11 @@ namespace HorariosConsoleApp.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     EmpleadoId = table.Column<int>(nullable: true),
                     SalarioBase = table.Column<decimal>(nullable: false),
-                    SalarioExtra = table.Column<decimal>(nullable: false),
                     Equipo = table.Column<string>(nullable: true),
                     Horario = table.Column<string>(nullable: true),
                     Fecha = table.Column<DateTime>(nullable: false),
-                    DiasLaborados = table.Column<TimeSpan>(nullable: false),
-                    DiasCompensatorios = table.Column<TimeSpan>(nullable: false),
+                    DiasLaborados = table.Column<int>(nullable: false),
+                    DiasCompensatorios = table.Column<int>(nullable: false),
                     PlanillaId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -175,6 +174,30 @@ namespace HorariosConsoleApp.Migrations
                         column: x => x.EmpleadoId,
                         principalTable: "Empleados",
                         principalColumn: "EmpleadoId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DetallePagoEmpleado",
+                columns: table => new
+                {
+                    DetallePagoEmpleadoId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PagoEmpleadoId = table.Column<int>(nullable: false),
+                    CantidadHoras = table.Column<decimal>(nullable: false),
+                    TipoHora = table.Column<string>(nullable: true),
+                    EsNocturna = table.Column<bool>(nullable: false),
+                    Porcentaje = table.Column<decimal>(nullable: false),
+                    PagoExtra = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DetallePagoEmpleado", x => x.DetallePagoEmpleadoId);
+                    table.ForeignKey(
+                        name: "FK_DetallePagoEmpleado_PagoEmpleados_PagoEmpleadoId",
+                        column: x => x.PagoEmpleadoId,
+                        principalTable: "PagoEmpleados",
+                        principalColumn: "PagoEmpleadoId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -220,6 +243,11 @@ namespace HorariosConsoleApp.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_DetallePagoEmpleado_PagoEmpleadoId",
+                table: "DetallePagoEmpleado",
+                column: "PagoEmpleadoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Empleados_EquipoId",
                 table: "Empleados",
                 column: "EquipoId");
@@ -257,6 +285,9 @@ namespace HorariosConsoleApp.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "DetallePagoEmpleado");
+
             migrationBuilder.DropTable(
                 name: "HoraDetalles");
 

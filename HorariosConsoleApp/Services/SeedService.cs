@@ -35,15 +35,16 @@ namespace HorariosConsoleApp.Services
             }
 
             _dbContext.Database.ExecuteSqlCommand(@"CREATE OR ALTER VIEW [dbo].[ConsultaDetalleHoras] AS 
-             SELECT COUNT(*) AS NumeroHoras,th.TipoHoraId,th.Nombre AS TipoHora,th.EsNocturna,th.PorcentajeExtra as PorcentajeHora,h.Alias 
+             SELECT COUNT(*) AS NumeroHoras,th.TipoHoraId,th.Nombre AS TipoHora,th.PorcentajeExtra as PorcentajeHora,h.Alias,
             AS Horario,d.DiaId,d.Nombre
-            AS Dia FROM dbo.HoraDetalles AS hd INNER JOIN
+            AS Dia, hf.EsNocturno
+            FROM dbo.HoraDetalles AS hd INNER JOIN
             dbo.TipoHoras AS th ON hd.TipoHoraId = th.TipoHoraId INNER JOIN
             dbo.HorariosFragmentos AS hf ON hd.HorarioFragmentoId = hf.HorarioFragmentoId INNER JOIN
             dbo.Horarios AS h ON hf.HorarioId = h.HorarioId INNER JOIN
             dbo.Dias AS d ON hf.DiaId = d.DiaId
             GROUP BY th.Nombre,
-            hd.HorarioFragmentoId,h.Alias,d.Nombre,d.DiaId,th.TipoHoraId,th.PorcentajeExtra,th.EsNocturna");
+            hd.HorarioFragmentoId,h.Alias,d.Nombre,d.DiaId,th.TipoHoraId,th.PorcentajeExtra,hf.EsNocturna");
             return _dbContext.SaveChanges() > 0;
         }
         public IEnumerable<string> Generar()
