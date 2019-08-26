@@ -27,6 +27,7 @@ namespace HorariosConsoleApp.Services
                 
                 if (dia.Abreviatura.Equals("S"))
                 {
+
                     horarioFraccionList.AddRange(
                         new List<HorarioFragmento>()
                         {
@@ -254,6 +255,21 @@ namespace HorariosConsoleApp.Services
             return _dbContext.SaveChanges() > 0;
         }
 
+        private bool ValidarFragmentos()
+        {
+            var horariosFragmentos = _dbContext.HorariosFragmentos.ToList();
+            if (horariosFragmentos.Any())
+            {
+                foreach (var horarioFragmento in horariosFragmentos)
+                {
+                    horarioFragmento.EsNocturno = Workday.IsNightly(horarioFragmento.HoraInicio, horarioFragmento.HoraFin);
+                }
+
+                return _dbContext.SaveChanges()>0;
+            }
+
+            return false;
+        }
         public IEnumerable<string> Seed()
         {
             var mensajes = new List<string>();
@@ -263,6 +279,7 @@ namespace HorariosConsoleApp.Services
             if(GenerarHoraDetalle("I") 
                &&GenerarHoraDetalle("II")
                &&GenerarHoraDetalle("III")) mensajes.Add("HorasDetalle done");
+            if(ValidarFragmentos()) mensajes.Add("Horario Done");
             return mensajes;
 
         }
