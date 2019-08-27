@@ -2,9 +2,10 @@
 using HorariosConsoleApp.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Globalization;
-using System.Linq;
+using System.Collections.Generic;
 using HorariosConsoleApp.Helpers;
+using System.Linq;
+using HorariosConsoleApp.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace HorariosConsoleApp
@@ -47,7 +48,7 @@ namespace HorariosConsoleApp
                     Console.WriteLine(@"Desea CalcularPagoEmpleado?(y/n)?");
                     if (Console.ReadKey().Key == ConsoleKey.Y)
                     {
-                        calcularPago.Calcular(new DateTime(2019, 7, 1), new DateTime(2019, 7, 28));
+                        calcularPago.Calcular(new DateTime(2019, 2, 1));
                         
                     }
 
@@ -55,7 +56,55 @@ namespace HorariosConsoleApp
                     Console.WriteLine(@"Desea verifica la consulta de prueba (MitnickQuery)?(y/n)?");
                     if (Console.ReadKey().Key == ConsoleKey.Y)
                     {
-                        //TODO
+                        var queryhorarioDetalle = appDbContext.ConsultaHoraDetalle.ToList();
+
+                        var pagoEmpleados = appDbContext.PagoEmpleados
+                                                       .Include(emp=> emp.Empleado).ToList();
+
+                        foreach (var pagoEmpleado in pagoEmpleados)
+                        {
+                            List<ConsultaDetalleHoras> horariosFiltered;
+                            if (pagoEmpleado.Horario.Equals("Azul"))
+                            {
+                                horariosFiltered = queryhorarioDetalle.Where(hd =>(
+                                    hd.DiaId == 2 || hd.DiaId == 6 || hd.DiaId == 7)
+                                    &&hd.Horario.Equals("Azul")).ToList();
+                            }
+                            else if(pagoEmpleado.Horario.Equals("Rojo"))
+                            {
+                                horariosFiltered = queryhorarioDetalle.Where(hd =>
+                                    (hd.DiaId == 2 || hd.DiaId == 7)
+                                    &&hd.Horario.Equals("Rojo")).ToList();
+                            }
+                            else
+                            {
+                                horariosFiltered = queryhorarioDetalle.Where(hd =>(
+                                    hd.DiaId == 2 || hd.DiaId == 7 || hd.DiaId==1 && hd.NumeroHoras==6)
+                                    &&hd.Horario.Equals("Negro")).ToList();
+                            }
+                            var result = new List<object>();
+                            foreach (var horario in horariosFiltered)
+                            { 
+                                var salarioHora = pagoEmpleado.SalarioBase/30/(horario.EsNocturno ?  Workday.HeN:Workday.HeD);
+                                
+                                var x = new
+                                {
+                                    Nombre = $"{pagoEmpleado.Empleado.Nombre} {pagoEmpleado.Empleado.Apellido}",
+                                    horario.Horario,
+                                    horario.TipoHora,
+                                    SubTotal = (horario.PorcentajeHora/100)*horario.NumeroHoras*salarioHora
+                                               *(horario.DiaId==2?pagoEmpleado.DiasLaborados
+                                                   :pagoEmpleado.DiasCompensatorios)
+                                };
+                                result.Add(x);
+                            }
+
+                            foreach (var value in result)
+                            {
+                                Console.WriteLine(value);
+                            }
+                        }
+
                         Console.ReadLine();
                     }
                     

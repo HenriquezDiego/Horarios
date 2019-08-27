@@ -104,7 +104,7 @@ namespace HorariosConsoleApp.Helpers
             var saturdays = 0;
             var sundays = 0;
             var weekdays = 0;
-            for (var i = 0; i < 31; i++)
+            for (var i = 0; i < days; i++)
             {
                 switch (date.DayOfWeek)
                 {

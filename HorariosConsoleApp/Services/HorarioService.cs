@@ -218,21 +218,18 @@ namespace HorariosConsoleApp.Services
             
             foreach (var fragmento in fragmentosHorario)
             {
-                var horasEfectivas = (Workday.IsNightly(fragmento.HoraInicio, fragmento.HoraFin)) ? Workday.HeN : Workday.HeD;
-
                 var dia = fragmento.Dia.Abreviatura;
                 List<HoraDetalle> listHoras = new List<HoraDetalle>();
                 var hora = fragmento.HoraInicio.Hours;
                 var horaFin = fragmento.HoraFin.Hours;
                 horaFin = horaFin == 23 ? 24 : horaFin;
-                var horasTrabajadas = 0;
                 var extra = false;
                 while (hora < horaFin)
                 {
-                    horasTrabajadas++;
-
-                    if (horasTrabajadas > horasEfectivas || fragmento.Dia.DiaId==1 && fragmento.HoraInicio.Hours<6
-                        || fragmento.Dia.DiaId==7 || fragmento.HoraInicio.Hours>=18 && fragmento.Dia.DiaId==6)
+                    if ((hora>=18 && fragmento.Dia.DiaId==6)
+                        || (hora>13 && hora<17&&fragmento.DiaId==7)
+                        || (hora>=0 && hora<=5 && fragmento.DiaId==1)
+                        || (hora==5 && fragmento.DiaId>1 && fragmento.DiaId<7))
                     {
                         extra = true;
                     }

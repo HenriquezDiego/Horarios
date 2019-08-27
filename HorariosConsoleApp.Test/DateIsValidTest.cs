@@ -28,6 +28,14 @@ namespace HorariosConsoleApp.Test
             Assert.Equal(4,infoDate.Sundays);
         }
 
+        [Fact]
+        public void InformacionDomingosFebreroSobreCarga()
+        {
+            var infoDate = Workday.DateInfo(2019,2); 
+            Assert.Equal(4,infoDate.Sundays);
+            Assert.Equal(20,infoDate.Weekdays);
+        }
+
         
     }
 }
