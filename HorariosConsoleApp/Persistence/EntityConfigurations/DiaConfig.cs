@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HorariosConsoleApp.Persistence.EntityConfigurations
 {
-    public class DiaConfiguration : IEntityTypeConfiguration<Dia>
+    public class DiaConfig : IEntityTypeConfiguration<Dia>
     {
         public void Configure(EntityTypeBuilder<Dia> builder)
         {
