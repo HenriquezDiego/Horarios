@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HorariosConsoleApp\HorariosConsoleApp.csproj" />
+    <ProjectReference Include="..\..\src\HorariosConsoleApp\HorariosConsoleApp.csproj" />
   </ItemGroup>
 
 </Project>
