@@ -21,7 +21,6 @@ namespace HorariosConsoleApp
             services.AddTransient<ISeedService, SeedService>();
             services.AddSingleton<IPagoEmpleadoService, PagoEmpleadoService>();
 
-
             var serviceProvider = services.BuildServiceProvider();
             var seedService = serviceProvider.GetService<ISeedService>();
             var calcularPago = serviceProvider.GetService<IPagoEmpleadoService>();
@@ -110,7 +109,6 @@ namespace HorariosConsoleApp
                     
                 }
 
-                
             }
             catch (Exception e)
             {
