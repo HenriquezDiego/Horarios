@@ -1,5 +1,4 @@
 ﻿using System;
-
 namespace HorariosConsoleApp.Helpers
 {
     public static class DateValidator
