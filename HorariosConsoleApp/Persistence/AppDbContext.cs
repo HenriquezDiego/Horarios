@@ -15,12 +15,13 @@ namespace HorariosConsoleApp.Persistence
         public DbSet<Dia> Dias { get; set; }
         public DbSet<Horario> Horarios { get; set; }
         public DbSet<PagoEmpleado> PagoEmpleados { get; set; }
+        public DbSet<Asueto> Asuetos { get; set; }
         public DbQuery<ConsultaDetalleHoras> ConsultaHoraDetalle { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "server=localhost;Database=HorarioDbV2.0.0;Integrated Security=true;MultipleActiveResultSets=true;");
+                "server=localhost;Database=HorarioDbV2.0.1;Integrated Security=true;MultipleActiveResultSets=true;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -31,7 +32,8 @@ namespace HorariosConsoleApp.Persistence
             }
             modelBuilder.ApplyConfiguration(new TipoHoraConfig())
                         .ApplyConfiguration(new HorarioConfig())
-                        .ApplyConfiguration(new DiaConfiguration());
+                        .ApplyConfiguration(new DiaConfig())
+                        .ApplyConfiguration(new AsuetoConfig());
 
             modelBuilder.Query<ConsultaDetalleHoras>().ToView("ConsultaDetalleHoras");
             
