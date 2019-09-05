@@ -103,12 +103,9 @@ namespace HorariosConsoleApp
                                 Console.WriteLine(value);
                             }
                         }
-
                         Console.ReadLine();
                     }
-                    
                 }
-
             }
             catch (Exception e)
             {
