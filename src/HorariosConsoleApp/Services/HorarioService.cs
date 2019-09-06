@@ -246,7 +246,7 @@ namespace HorariosConsoleApp.Services
                     hora++;
                 }
 
-                _dbContext.HoraDetalles.AddRange(listHoras);
+                _dbContext.HorarioFragmentoDetalle.AddRange(listHoras);
             }
 
             return _dbContext.SaveChanges() > 0;

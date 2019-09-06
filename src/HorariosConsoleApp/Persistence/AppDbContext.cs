@@ -9,14 +9,14 @@ namespace HorariosConsoleApp.Persistence
     {
         public DbSet<Empleado> Empleados { get; set; }
         public DbSet<Equipo> Equipos { get; set; }
-        public DbSet<HorarioFragmentoDetalle> HoraDetalles { get; set; }
+        public DbSet<HorarioFragmentoDetalle> HorarioFragmentoDetalle { get; set; }
         public DbSet<HorarioFragmento> HorariosFragmentos { get; set; }
         public DbSet<TipoHora> TipoHoras { get; set; }
         public DbSet<Dia> Dias { get; set; }
         public DbSet<Horario> Horarios { get; set; }
         public DbSet<PagoEmpleado> PagoEmpleados { get; set; }
         public DbSet<Asueto> Asuetos { get; set; }
-        public DbQuery<DetalleHoras> ConsultaHoraDetalle { get; set; }
+        public DbQuery<DetalleHoras> HoraDetalle { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -35,7 +35,7 @@ namespace HorariosConsoleApp.Persistence
                         .ApplyConfiguration(new DiaConfig())
                         .ApplyConfiguration(new AsuetoConfig());
 
-            modelBuilder.Query<DetalleHoras>().ToView("ConsultaDetalleHoras");
+            modelBuilder.Query<DetalleHoras>().ToView("DetalleHoras");
             
         }
     }

@@ -4,7 +4,7 @@ namespace HorariosConsoleApp.Entities
 {
     public class HorarioFragmentoDetalle
     {
-        public int HoraDetalleId { get; set; }
+        public int HorarioFragmentoDetalleId { get; set; }
         public int HorarioFragmentoId { get; set; }
         public HorarioFragmento HorarioFragmento { get; set; }
         public TimeSpan Hora { get; set; }

@@ -55,7 +55,7 @@ namespace HorariosConsoleApp
                     Console.WriteLine(@"Desea verifica la consulta de prueba (MitnickQuery)?(y/n)?");
                     if (Console.ReadKey().Key == ConsoleKey.Y)
                     {
-                        var queryhorarioDetalle = appDbContext.ConsultaHoraDetalle.ToList();
+                        var queryhorarioDetalle = appDbContext.HoraDetalle.ToList();
 
                         var pagoEmpleados = appDbContext.PagoEmpleados
                                                        .Include(emp=> emp.Empleado).ToList();
@@ -84,7 +84,7 @@ namespace HorariosConsoleApp
                             var result = new List<object>();
                             foreach (var horario in horariosFiltered)
                             { 
-                                var salarioHora = pagoEmpleado.SalarioBase/30/(horario.EsNocturno ?  Workday.HeN:Workday.HeD);
+                                var salarioHora = pagoEmpleado.SalarioBase/30/(horario.EsNocturno ?   Workday.HeN:Workday.HeD);
                                 
                                 var x = new
                                 {
