@@ -219,7 +219,7 @@ namespace HorariosConsoleApp.Services
             foreach (var fragmento in fragmentosHorario)
             {
                 var dia = fragmento.Dia.Abreviatura;
-                List<HoraDetalle> listHoras = new List<HoraDetalle>();
+                List<HorarioFragmentoDetalle> listHoras = new List<HorarioFragmentoDetalle>();
                 var hora = fragmento.HoraInicio.Hours;
                 var horaFin = fragmento.HoraFin.Hours;
                 horaFin = horaFin == 23 ? 24 : horaFin;
@@ -235,7 +235,7 @@ namespace HorariosConsoleApp.Services
                     }
 
 
-                    var detalleHora = new HoraDetalle()
+                    var detalleHora = new HorarioFragmentoDetalle()
                     {
                         Hora = new TimeSpan(hora,0,0),
                         HorarioFragmentoId = fragmento.HorarioFragmentoId,

@@ -34,7 +34,7 @@ namespace HorariosConsoleApp.Services
                 _dbContext.PagoEmpleados.RemoveRange(pagoEmpleado);
             }
 
-            _dbContext.Database.ExecuteSqlCommand(@"CREATE OR ALTER VIEW [dbo].[ConsultaDetalleHoras] AS 
+            _dbContext.Database.ExecuteSqlCommand(@"CREATE OR ALTER VIEW [dbo].[DetalleHoras] AS 
              SELECT COUNT(*) AS NumeroHoras,th.TipoHoraId,th.Nombre AS TipoHora,th.PorcentajeExtra AS PorcentajeHora,h.Alias
             AS Horario,d.DiaId,d.Nombre
             AS Dia, hf.EsNocturno

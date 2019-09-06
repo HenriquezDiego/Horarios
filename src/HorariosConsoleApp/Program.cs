@@ -62,7 +62,7 @@ namespace HorariosConsoleApp
 
                         foreach (var pagoEmpleado in pagoEmpleados)
                         {
-                            List<ConsultaDetalleHoras> horariosFiltered;
+                            List<DetalleHoras> horariosFiltered;
                             if (pagoEmpleado.Horario.Equals("Azul"))
                             {
                                 horariosFiltered = queryhorarioDetalle.Where(hd =>(

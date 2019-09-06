@@ -2,7 +2,7 @@
 
 namespace HorariosConsoleApp.Entities
 {
-    public class HoraDetalle
+    public class HorarioFragmentoDetalle
     {
         public int HoraDetalleId { get; set; }
         public int HorarioFragmentoId { get; set; }

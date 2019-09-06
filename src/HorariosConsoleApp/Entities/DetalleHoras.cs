@@ -1,6 +1,6 @@
 ﻿namespace HorariosConsoleApp.Entities
 {
-    public class ConsultaDetalleHoras
+    public class DetalleHoras
     {
         public int NumeroHoras { get; set; }
         public int TipoHoraId { get; set; }
