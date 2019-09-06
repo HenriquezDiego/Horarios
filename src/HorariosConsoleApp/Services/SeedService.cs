@@ -37,7 +37,7 @@ namespace HorariosConsoleApp.Services
             _dbContext.Database.ExecuteSqlCommand(@"CREATE OR ALTER VIEW [dbo].[DetalleHoras] AS 
              SELECT COUNT(*) AS NumeroHoras,th.TipoHoraId,th.Nombre AS TipoHora,th.PorcentajeExtra AS PorcentajeHora,h.Alias
             AS Horario,d.DiaId,d.Nombre
-            AS Dia,hf.EsNocturno AS FragmentoEsNocturno,th.EsNocturna AS HoraEsNocturna
+            AS Dia,hf.EsNocturno AS EsFragmentoNocturno,th.EsNocturna AS EsHoraNocturna
             FROM dbo.HorarioFragmentoDetalle AS hd INNER JOIN
             dbo.TipoHoras AS th ON hd.TipoHoraId = th.TipoHoraId INNER JOIN
             dbo.HorariosFragmentos AS hf ON hd.HorarioFragmentoId = hf.HorarioFragmentoId INNER JOIN

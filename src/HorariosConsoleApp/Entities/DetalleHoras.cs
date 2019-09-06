@@ -9,6 +9,7 @@
         public string Horario { get; set; }
         public int DiaId { get; set; }
         public string Dia { get; set; }
-        public bool EsNocturno { get; set; }
+        public bool EsFragmentoNocturno { get; set; }
+        public bool EsHoraNocturna { get; set; }
     }
 }

@@ -84,7 +84,7 @@ namespace HorariosConsoleApp
                             var result = new List<object>();
                             foreach (var horario in horariosFiltered)
                             { 
-                                var salarioHora = pagoEmpleado.SalarioBase/30/(horario.EsNocturno ?   Workday.HeN:Workday.HeD);
+                                var salarioHora = pagoEmpleado.SalarioBase/30/(horario.EsFragmentoNocturno && horario.EsHoraNocturna?   Workday.HeN:Workday.HeD);
                                 
                                 var x = new
                                 {
