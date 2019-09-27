@@ -82,21 +82,32 @@ namespace HorariosConsoleApp
                                     &&hd.Horario.Equals("Negro")).ToList();
                             }
                             var result = new List<object>();
+
+                            var emp = new
+                            {
+                                pagoEmpleado.PagoEmpleadoId,
+                                Nombre = $"{pagoEmpleado.Empleado.Nombre} {pagoEmpleado.Empleado.Apellido}",
+                                pagoEmpleado.DiasLaborados,
+                                pagoEmpleado.DiasCompensatorios,
+                                Lista = new List<object>()
+                            };
+
                             foreach (var horario in horariosFiltered)
                             { 
                                 var salarioHora = pagoEmpleado.SalarioBase/30/(horario.EsFragmentoNocturno && horario.EsHoraNocturna?   Workday.HeN:Workday.HeD);
                                 
-                                var x = new
+                                emp.Lista.Add(new
                                 {
-                                    Nombre = $"{pagoEmpleado.Empleado.Nombre} {pagoEmpleado.Empleado.Apellido}",
+
                                     horario.Horario,
                                     horario.TipoHora,
                                     SubTotal = (horario.PorcentajeHora/100)*horario.NumeroHoras*salarioHora
                                                *(horario.DiaId==2?pagoEmpleado.DiasLaborados
                                                    :pagoEmpleado.DiasCompensatorios)
-                                };
-                                result.Add(x);
+                                });
+                                
                             }
+                            result.Add(emp);
 
                             foreach (var value in result)
                             {
