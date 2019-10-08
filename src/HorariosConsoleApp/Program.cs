@@ -20,17 +20,19 @@ namespace HorariosConsoleApp
             services.AddTransient<IHorarioService, HorarioService>();
             services.AddTransient<ISeedService, SeedService>();
             services.AddSingleton<IPagoEmpleadoService, PagoEmpleadoService>();
+            services.AddSingleton<IFactory, Factory>();
 
             var serviceProvider = services.BuildServiceProvider();
             var seedService = serviceProvider.GetService<ISeedService>();
             var calcularPago = serviceProvider.GetService<IPagoEmpleadoService>();
+            var factory = serviceProvider.GetService<IFactory>();
 
             try
             {
                 using (var appDbContext = new AppDbContext())
                 {
                     Console.WriteLine("Horarios Console App");
-
+                    Console.WriteLine(factory.Builder(1));
                     Console.WriteLine(@"Antes de continuar verifique no tenga ninguna versión de la base de datos creada. Desea continuar (y/n)?");
 
                     if (Console.ReadKey().Key == ConsoleKey.Y)
